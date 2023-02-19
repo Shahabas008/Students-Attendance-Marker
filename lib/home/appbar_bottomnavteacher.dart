@@ -1,5 +1,5 @@
-import 'package:collegeproject/calendarpage.dart';
-import 'package:collegeproject/homepageteacher.dart';
+import 'package:collegeproject/home/calendarpage.dart';
+import 'package:collegeproject/home/homepageteacher.dart';
 //import 'package:collegeproject/homepagetearcher.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_nav_bar/bottom_nav_bar.dart';
