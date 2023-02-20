@@ -1,4 +1,7 @@
+import 'package:collegeproject/create_an_account/studentaccountfirstpage.dart';
+import 'package:collegeproject/create_an_account/teacheraccountfirstpage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Signuppage extends StatelessWidget {
   const Signuppage({super.key});
@@ -6,49 +9,50 @@ class Signuppage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 234, 234, 234),
-      body: Padding(
+      appBar: AppBar(
+        title: const Text('Create Account'),
+      ),
+      backgroundColor: const Color.fromARGB(255, 234, 234, 234),
+      body:
+       Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
+            SizedBox(
+              child: Image.asset('assets/teacherorstudent.png',
+              width: 250,
+              height: 250,),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'CREATE ACCOUNT',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    fontSize: 20,
-                  ),
-                ),
-              ],
+              children: const [],
             ),
-            const SizedBox(height: 200,),
+           
             ElevatedButton(
-              
-              style:ElevatedButton.styleFrom(
-               minimumSize:const Size(50, 50),
-              backgroundColor: Colors.white,
-              elevation: 20,
-              foregroundColor: Colors.black,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(50, 50),
+                backgroundColor:const Color.fromARGB(255, 0, 0, 0),
+                elevation: 20,
+                foregroundColor:const Color.fromARGB(255, 255, 255, 255),
               ),
               child: const Text('TEACHER ACCOUNT'),
               onPressed: () {
-                 Navigator.pushNamed(context, "navigatingtoteacheraccountsignup");
+                 Get.to(() => const Teacheraccpage1());
               },
             ),
-            const SizedBox(height: 50,),
+            const SizedBox(
+              height: 50,
+            ),
             ElevatedButton(
-              style:ElevatedButton.styleFrom(
-                 minimumSize:const Size(50, 50),
-              backgroundColor: Colors.white,
-              elevation: 20,
-              foregroundColor: Colors.black,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(50, 50),
+                backgroundColor:const Color.fromARGB(255, 0, 0, 0),
+                elevation: 20,
+                foregroundColor:const  Color.fromARGB(255, 255, 255, 255),
               ),
               child: const Text('STUDENT ACCOUNT'),
               onPressed: () {
-                Navigator.pushNamed(context, "navigatingtostudentaccountsignup");
+               Get.to(() => const Studentaccpage1());
               },
             ),
           ],

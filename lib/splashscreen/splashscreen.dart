@@ -17,6 +17,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 234, 234, 234),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
@@ -38,13 +39,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
                 ],
               ),
              const  SizedBox(height: 250),
-             const  Text(
-                'Created by SHANIBA, SHIYANA, ADIL & SHAHABAS.',
-                style: TextStyle(
-                   fontSize: 10,
-                   fontWeight: FontWeight.w500,
-                    ),
-              )
+            
             ],
           ),
         ),

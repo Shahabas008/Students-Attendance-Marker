@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1065753435665",
+    "project_id": "students-attendance-marker",
+    "storage_bucket": "students-attendance-marker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065753435665:android:ff12e82314c6715431dbb0",
+        "android_client_info": {
+          "package_name": "com.example.collegeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1065753435665-c7sp6rfd5hh47h4k628uma45474g5mm3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_ZWSGzeqm9vG87T--8uQuGZHQg19crUs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1065753435665-c7sp6rfd5hh47h4k628uma45474g5mm3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1065753435665-u9u20i767urfacsei97kianofecm3hkf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.collegeproject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

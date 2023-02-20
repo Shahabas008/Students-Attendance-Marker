@@ -1,4 +1,7 @@
+import 'package:collegeproject/create_an_account/loginpage.dart';
+import 'package:collegeproject/create_an_account/studentaccountsecondpage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Studentaccpage1 extends StatelessWidget {
   const Studentaccpage1({super.key});
@@ -8,13 +11,10 @@ class Studentaccpage1 extends StatelessWidget {
     return Scaffold(
        backgroundColor:const Color.fromARGB(255, 234, 234, 234),
       appBar: AppBar(
-        centerTitle: true,
+       
         title: const Text(
-          'Student account SIGN UP',
-          style: TextStyle(
-            fontWeight: FontWeight.w300,
-            fontSize: 20,
-          ),
+          'Student Account SIGN UP',
+          
         ),
       ),
       body: body1(context),
@@ -24,68 +24,108 @@ class Studentaccpage1 extends StatelessWidget {
 
 @override
 Widget body1(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
-    child: Column(
-      children: [
-        const TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'First Name',
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Last Name',
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'E-mail Name',
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Password ',
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Password Confirmation',
-          ),
-        ),
-        const SizedBox(height: 20,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+  final formkey = GlobalKey<FormState>();
+  final firstname = TextEditingController();
+  final lastname = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+  
+  return Form(
+    key: formkey,
+    child: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
+        child: Column(
           children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize:const Size(20, 50)
+            TextFormField(
+              controller: firstname,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person),
+                labelText: 'First Name',
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, "navigatingtostudentaccountsignup2");
-              },
-              child: const Text('NEXT'),
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              controller: lastname,
+              decoration:const  InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Last Name',
+                prefixIcon: Icon(Icons.person)
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+             TextFormField(
+              controller: email,
+              decoration:const  InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'E-mail ',
+                prefixIcon:Icon(Icons.email) 
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+             TextFormField(
+              controller: password,
+              obscureText: true,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Password ',
+                prefixIcon: Icon(Icons.password)
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              obscureText: true,
+              decoration:const  InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Password Confirmation',
+                prefixIcon: Icon(Icons.password)
+              ),
+            ),
+            const SizedBox(height: 20,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(350, 50)
+                  ),
+                  onPressed: () {
+                    Get.to(() =>const Studentaccpage2());
+                  },
+                  child: const Text('NEXT'),
+                ),
+                
+              ],
+              
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 const Text('Already have an account ?',
+                 style: TextStyle(
+                  fontSize: 15
+                 ),
+              ),
+              TextButton(onPressed: () {
+                Get.to(() => const Loginpage());
+              }, child: const Text('Log In',
+              style: TextStyle(
+                fontSize: 20
+              ),))
+              ]
+            )
           ],
-        )
-      ],
+        ),
+      ),
     ),
   );
 }
