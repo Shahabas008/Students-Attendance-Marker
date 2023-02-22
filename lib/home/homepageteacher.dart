@@ -1,4 +1,7 @@
+import 'package:collegeproject/controller/login_controller.dart';
+import 'package:collegeproject/create_an_account/loginpage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Homepageteacher extends StatelessWidget {
   const Homepageteacher({super.key});
@@ -36,6 +39,12 @@ class Homepageteacher extends StatelessWidget {
                 },
               ),
             ),
+             ElevatedButton(
+              onPressed: () {  
+              LoginController.instance.signOut();
+              Get.off(() => const Loginpage());
+
+            }, child:const  Text('sign out')),
             SizedBox(
               height: 50,
               width: 200,

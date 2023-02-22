@@ -18,24 +18,41 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 234, 234, 234),
         appBar: AppBar(
           title: const Text(
-            'Teacher Account',
+            'Account Details',
           ),
         ),
         body: Form(
           key: data.formkey,
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
+              padding: const EdgeInsets.fromLTRB(30, 15, 30, 30),
               child: Column(
                 children: [
+                  Row(children: const [
+                     Text(
+                      'Please Enter Your Details',
+                      style: TextStyle(color: Colors.grey, fontSize: 18),
+                    ),
+                  ]),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   TextFormField(
+                    validator: ((value) {
+                      if (value!.isEmpty) {
+                        return 'The field is required';
+                      } else if (value.length < 4) {
+                        return 'Enter at least 4 characters';
+                      } else {
+                        return null;
+                      }
+                    }),
                     controller: data.firstname,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.person),
@@ -47,6 +64,15 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                     height: 20,
                   ),
                   TextFormField(
+                    validator: ((value) {
+                      if (value!.isEmpty) {
+                        return 'The field is required';
+                      } else if (value.length < 4) {
+                        return 'Enter at least 4 characters';
+                      } else {
+                        return null;
+                      }
+                    }),
                     controller: data.lastname,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.person),
@@ -58,6 +84,12 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                     height: 20,
                   ),
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty || !value.contains('@')) {
+                        return 'Please enter a valid email address';
+                      }
+                      return null;
+                    },
                     controller: data.email,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email),
@@ -69,17 +101,28 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                     height: 20,
                   ),
                   TextFormField(
+                    validator: ((value) {
+                      if(value!.isEmpty){
+                        return 'Please Enter Password';
+                      }
+                      
+                      else if (value.length < 6) {
+                        return 'Password is too short';
+                      }else {
+                        return null;
+                      }
+                    }),
                     controller: data.password,
                     obscureText: data.obscureText,
-                    decoration:  InputDecoration(
+                    decoration: InputDecoration(
                       suffixIcon: IconButton(
                         onPressed: _toggle,
                         icon: data.obscureText
                             ? const Icon(Icons.visibility)
                             : const Icon(Icons.visibility_off),
                       ),
-                      prefixIcon:const  Icon(Icons.fingerprint),
-                      border:const  OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.fingerprint),
+                      border: const OutlineInputBorder(),
                       labelText: 'Password ',
                     ),
                   ),
@@ -87,11 +130,17 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                     height: 20,
                   ),
                   TextFormField(
+                    validator: ((value) {
+                      if (value != data.password.text) {
+                        return 'The password don\'t match ';
+                      } else {
+                        return null;
+                      }
+                    }),
                     obscureText: true,
                     decoration: const InputDecoration(
-                      border:  OutlineInputBorder(),
-                      prefixIcon:  Icon(Icons.fingerprint),
-                      
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.fingerprint),
                       labelText: 'Password Confirmation',
                     ),
                   ),
@@ -105,10 +154,14 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                         style: ElevatedButton.styleFrom(
                             minimumSize: const Size(350, 50)),
                         onPressed: () {
-                         SignUpController.instance.createuser(data.email.text, data.password.text);
-                         SignUpController.instance.registeruser(data.email.text, data.firstname.text, data.lastname.text);
+                          SignUpController.instance
+                              .createuser(data.email.text, data.password.text);
+                          SignUpController.instance.registeruserteacher(
+                              data.email.text,
+                              data.firstname.text,
+                              data.lastname.text);
                         },
-                        child: const Text('NEXT'),
+                        child: const Text('Sign Up'),
                       ),
                     ],
                   ),
@@ -118,9 +171,7 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     const Text(
                       'Already have an account ?',
-                      style: TextStyle(fontSize: 15,
-                      color: Colors.grey),
-                      
+                      style: TextStyle(fontSize: 15, color: Colors.grey),
                     ),
                     TextButton(
                         onPressed: () {

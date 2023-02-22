@@ -25,17 +25,38 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
         backgroundColor: const Color.fromARGB(255, 234, 234, 234),
         appBar: AppBar(
           title: const Text(
-            'Student Account',
+            'Account Details',
           ),
         ),
         body: Form(
           key: data.formkey,
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(30, 60, 30, 30),
+              padding: const EdgeInsets.fromLTRB(30, 15, 30, 30),
               child: Column(
                 children: [
+                  Row(
+                    children: const [
+                      Text('Please Enter Your Details',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey
+                      ),)
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   TextFormField(
+                    validator: ((value) {
+                      if (value!.isEmpty) {
+                        return 'The field is required';
+                      } else if (value.length < 4) {
+                        return 'Enter at least 4 characters';
+                      } else {
+                        return null;
+                      }
+                    }),
                     controller: data.firstname,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -47,6 +68,15 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                     height: 20,
                   ),
                   TextFormField(
+                    validator: ((value) {
+                      if (value!.isEmpty) {
+                        return 'The field is required';
+                      } else if (value.length < 4) {
+                        return 'Enter at least 4 characters';
+                      } else {
+                        return null;
+                      }
+                    }),
                     controller: data.lastname,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -57,6 +87,12 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                     height: 20,
                   ),
                   TextFormField(
+                     validator: (value) {
+                      if (value!.isEmpty || !value.contains('@')) {
+                        return 'Please enter a valid email address';
+                      }
+                      return null;
+                    },
                     controller: data.email,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -67,6 +103,17 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                     height: 20,
                   ),
                   TextFormField(
+                     validator: ((value) {
+                      if(value!.isEmpty){
+                        return 'Please Enter Password';
+                      }
+                      
+                      else if (value.length < 6) {
+                        return 'Password is too short';
+                      }else {
+                        return null;
+                      }
+                    }),
                     controller: data.password,
                     obscureText: data.obscureText,
                     decoration: InputDecoration(
@@ -84,6 +131,13 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                     height: 20,
                   ),
                   TextFormField(
+                     validator: ((value) {
+                      if (value != data.password.text) {
+                        return 'The password don\'t match ';
+                      } else {
+                        return null;
+                      }
+                    }),
                     obscureText: true,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -100,18 +154,12 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                         style: ElevatedButton.styleFrom(
                             minimumSize: const Size(350, 50)),
                         onPressed: () async {
-                          try{
-                              SignUpController.instance.registeruser(data.email.text,
-                               data.firstname.text, data.lastname.text);
-                          SignUpController.instance.createuser(
-                              data.email.text ,
-                              data.password.text  );
-                          
-                          }
-                          on FirebaseAuthException catch(e){
-                            print(e);
-                          }
-                              
+                          SignUpController.instance.registeruserstudents(
+                              data.email.text,
+                              data.firstname.text,
+                              data.lastname.text);
+                          SignUpController.instance
+                              .createuser(data.email.text, data.password.text);
                         },
                         child: const Text('SIGN UP'),
                       ),

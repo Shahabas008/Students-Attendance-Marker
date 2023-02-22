@@ -1,8 +1,9 @@
+
 import 'package:collegeproject/home/calendarpage.dart';
 import 'package:collegeproject/home/homepageteacher.dart';
-//import 'package:collegeproject/homepagetearcher.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_nav_bar/bottom_nav_bar.dart';
+
 
 class Appbarbottomavteacher extends StatefulWidget {
   const Appbarbottomavteacher({super.key});
@@ -37,9 +38,10 @@ class _AppbarbottomnavteacherState extends State<Appbarbottomavteacher> {
   Widget _body() => SizedBox.expand(
         child: IndexedStack(
           index: _selectedIndex,
-          children: const <Widget>[
-            Homepageteacher(),
-            Calendarpage(),
+          children: const  <Widget>[
+           
+             Homepageteacher(),
+             Calendarpage(),
            // AccountPage(),
           ],
         ),

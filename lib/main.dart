@@ -6,6 +6,7 @@ import 'package:collegeproject/create_an_account/studentaccountfirstpage.dart';
 import 'package:collegeproject/create_an_account/studentaccountsecondpage.dart';
 import 'package:collegeproject/create_an_account/teacheraccountfirstpage.dart';
 import 'package:collegeproject/create_an_account/teacheraccountsecondpage.dart';
+import 'package:collegeproject/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:collegeproject/Resources/palette.dart';
 import 'package:get/get.dart';
