@@ -12,13 +12,18 @@ class LoginController extends GetxController {
   /// TextField Controllers to get data from TextFields
   final email = TextEditingController();
   final password = TextEditingController();
+  final formkey = GlobalKey<FormState>();
 
 
   /// TextField Validation
 
   //Call this Function from Design & it will do the rest
   Future<void> loginUser(String email, String password) async {
-    (await FirebaseAuth.instance.signInWithEmailAndPassword(email :email , password : password)) ;
+    if(formkey.currentState!.validate()){
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email :email , password : password) ;
+      print('logged in successfully');
+    }
+    
     
 
 

@@ -17,18 +17,24 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
+        return android;
+      case TargetPlatform.iOS:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
+          'DefaultFirebaseOptions have not been configured for ios - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
-      case TargetPlatform.iOS:
-        return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -46,33 +52,11 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC_znoR0PBHlsEE4MGcUtaQNU6n_7atdpE',
-    appId: '1:1065753435665:web:42c08583c5d5def431dbb0',
-    messagingSenderId: '1065753435665',
-    projectId: 'students-attendance-marker',
-    authDomain: 'students-attendance-marker.firebaseapp.com',
-    storageBucket: 'students-attendance-marker.appspot.com',
-    measurementId: 'G-F8ZR3XS22M',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAhnctT1F9_cKgwcRBAq_unDx5BoeMJDg8',
-    appId: '1:1065753435665:ios:d305f1671af4436031dbb0',
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyC_ZWSGzeqm9vG87T--8uQuGZHQg19crUs',
+    appId: '1:1065753435665:android:ff12e82314c6715431dbb0',
     messagingSenderId: '1065753435665',
     projectId: 'students-attendance-marker',
     storageBucket: 'students-attendance-marker.appspot.com',
-    iosClientId: '1065753435665-u9u20i767urfacsei97kianofecm3hkf.apps.googleusercontent.com',
-    iosBundleId: 'com.example.collegeproject',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAhnctT1F9_cKgwcRBAq_unDx5BoeMJDg8',
-    appId: '1:1065753435665:ios:d305f1671af4436031dbb0',
-    messagingSenderId: '1065753435665',
-    projectId: 'students-attendance-marker',
-    storageBucket: 'students-attendance-marker.appspot.com',
-    iosClientId: '1065753435665-u9u20i767urfacsei97kianofecm3hkf.apps.googleusercontent.com',
-    iosBundleId: 'com.example.collegeproject',
   );
 }

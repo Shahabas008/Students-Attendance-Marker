@@ -1,4 +1,5 @@
-import 'package:collegeproject/Resources/login_controller.dart';
+import 'package:collegeproject/controller/login_controller.dart';
+import 'package:collegeproject/create_an_account/reset_password.dart';
 import 'package:collegeproject/create_an_account/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,10 +12,9 @@ class Loginpage extends StatefulWidget {
 }
 
 class _LoginpageState extends State<Loginpage> {
-   final data = Get.put(LoginController()) ;
-   final emailController = TextEditingController();
-   final passwordController = TextEditingController();
-   final formkey = GlobalKey<FormState>();
+   
+  final controller = Get.put(LoginController());
+   
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _LoginpageState extends State<Loginpage> {
           backgroundColor: const Color.fromARGB(255, 234, 234, 234),
         body: 
          Form(
-          key: formkey,
+          key: controller.formkey,
            child: Padding(
               padding: const EdgeInsets.all(10),
               child: ListView(
@@ -43,8 +43,9 @@ class _LoginpageState extends State<Loginpage> {
                   Container(
                     padding: const EdgeInsets.all(10),
                     child: TextField(
-                      controller: emailController,
+                      controller: controller.email,
                       decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.email),
                         border: OutlineInputBorder(),
                         labelText: 'E-Mail',
                       ),
@@ -54,8 +55,9 @@ class _LoginpageState extends State<Loginpage> {
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                     child: TextField(
                       obscureText: true,
-                      controller: passwordController,
+                      controller:controller.password,
                       decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.fingerprint),
                         border: OutlineInputBorder(),
                         labelText: 'Password',
                       ),
@@ -64,7 +66,7 @@ class _LoginpageState extends State<Loginpage> {
                   const SizedBox(height: 20,),
                   TextButton(
                     onPressed: () {
-                      //forgot password screen
+                      Get.to(() => const Resetpasswordpage());
                     },
                    
                     child: const Text(
@@ -78,7 +80,7 @@ class _LoginpageState extends State<Loginpage> {
                       child: ElevatedButton(
                         child: const Text('Login'),
                         onPressed: () {
-                        LoginController().loginUser(emailController.text.trim(), passwordController.text.trim());
+                        LoginController.instance.loginUser(controller.email.text.trim(), controller.password.text.trim());
                         },
                       )),
                       const SizedBox(height: 10,),
