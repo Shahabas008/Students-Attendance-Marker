@@ -1,4 +1,6 @@
+import 'package:collegeproject/create_an_account/loginpage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
@@ -49,7 +51,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   void waitingscreen() {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, "loginpage");
+      Get.off(() => const Loginpage());
     });
   }
 }

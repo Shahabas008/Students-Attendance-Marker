@@ -1,22 +1,17 @@
-import 'package:collegeproject/controller/login_controller.dart';
-import 'package:collegeproject/create_an_account/loginpage.dart';
+import 'package:collegeproject/Teacher/attendance.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Homepageteacher extends StatelessWidget {
-  const Homepageteacher({super.key});
+class Menupage extends StatelessWidget {
+  const Menupage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: body1(context),
-    );
-  }
-
-  Widget body1(BuildContext context) {
-
-    
-    return (Center(
+      appBar: AppBar(
+        backgroundColor: const  Color.fromARGB(255, 161, 46, 46),
+      ),
+        body: (Center(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 100, 20, 150),
         child: Column(
@@ -28,37 +23,30 @@ class Homepageteacher extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(50, 50),
-                  backgroundColor: Colors.white,
+                  backgroundColor:const  Color.fromARGB(255, 161, 46, 46),
                   elevation: 2,
-                  foregroundColor: Colors.black,
+                  foregroundColor:const  Color.fromARGB(255, 255, 255, 255),
                 ),
                 child: const Text(' ATTENDANCE'),
                 onPressed: () {
-                  Navigator.pushNamed(
-                      context, "navigatingtoattendancemarkcheck");
+                Get.to(() => const Attendance());
                 },
               ),
             ),
-             ElevatedButton(
-              onPressed: () {  
-              LoginController.instance.signOut();
-              Get.off(() => const Loginpage());
 
-            }, child:const  Text('sign out')),
             SizedBox(
               height: 50,
               width: 200,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(50, 50),
-                  backgroundColor: Colors.white,
+                  backgroundColor:const   Color.fromARGB(255, 161, 46, 46),
                   elevation: 2,
-                  foregroundColor: Colors.black,
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                 ),
                 child: const Text(' INTERNAL MARK'),
                 onPressed: () {
-                  Navigator.pushNamed(
-                      context, "navigatingtoteacheraccountsignup");
+                
                 },
               ),
             ),
@@ -68,14 +56,13 @@ class Homepageteacher extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(50, 50),
-                  backgroundColor: Colors.white,
+                  backgroundColor:const  Color.fromARGB(255, 161, 46, 46),
                   elevation: 2,
-                  foregroundColor: Colors.black,
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                 ),
                 child: const Text(' SEMESTER EXAM '),
                 onPressed: () {
-                  Navigator.pushNamed(
-                      context, "navigatingtoteacheraccountsignup");
+                 
                 },
               ),
             ),
@@ -85,14 +72,13 @@ class Homepageteacher extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(50, 50),
-                  backgroundColor: Colors.white,
+                  backgroundColor: const Color.fromARGB(255, 161, 46, 46),
                   elevation: 2,
-                  foregroundColor: Colors.black,
+                  foregroundColor:const  Color.fromARGB(255, 255, 255, 255),
                 ),
                 child: const Text(' NOTES'),
                 onPressed: () {
-                  Navigator.pushNamed(
-                      context, "navigatingtoteacheraccountsignup");
+                 
                 },
               ),
             ),
@@ -102,20 +88,35 @@ class Homepageteacher extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(50, 50),
-                  backgroundColor: Colors.white,
+                  backgroundColor: const Color.fromARGB(255, 161, 46, 46),
                   elevation: 2,
-                  foregroundColor: Colors.black,
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                 ),
                 child: const Text(' NOTIFICATION'),
                 onPressed: () {
-                  Navigator.pushNamed(
-                      context, "navigatingtoteacheraccountsignup");
+                 
+                },
+              ),
+            ),
+            SizedBox(
+              height: 50,
+              width: 200,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(50, 50),
+                  backgroundColor: const Color.fromARGB(255, 161, 46, 46),
+                  elevation: 2,
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                ),
+                child: const Text(' ASSIGNMENT'),
+                onPressed: () {
+                 
                 },
               ),
             ),
           ],
         ),
       ),
-    ));
+    )));
   }
 }
