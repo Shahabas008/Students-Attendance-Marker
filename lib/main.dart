@@ -1,5 +1,8 @@
-import 'package:collegeproject/Teacher/attendance.dart';
-import 'package:collegeproject/home/appbar_bottomnavteacher.dart';
+
+
+import 'package:collegeproject/Teacher/menu.dart';
+import 'package:collegeproject/create_an_account/loginpage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:collegeproject/Resources/palette.dart';
 import 'package:get/get.dart';
@@ -17,17 +20,20 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Palette.kToDark,
+      appBarTheme: const AppBarTheme(
+        color:    Color.fromARGB(255, 161, 46, 46),
+        foregroundColor: Colors.white
+      ),
       scaffoldBackgroundColor:  const Color.fromARGB(255, 234, 234, 234),),
       initialRoute: 'splashscreen',
       routes: {
-        'splashscreen': (context) =>   const Attendance(),
+        'splashscreen': (context) =>  Menupage(classname: '', subjectname: '', teachername: '',),
       },
     );
   }

@@ -1,7 +1,8 @@
+import 'package:collegeproject/Teacher/classlistview.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/create_an_account/reset_password.dart';
 import 'package:collegeproject/create_an_account/signup.dart';
-import 'package:collegeproject/home/appbar_bottomnavteacher.dart';
+
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _LoginpageState extends State<Loginpage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasData) {
-                return const Homepagelayout();
+                return const Classlistview();
               } else {
                 return Form(
                   key: controller.formkey,

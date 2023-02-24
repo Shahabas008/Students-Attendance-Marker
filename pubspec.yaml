@@ -81,6 +81,13 @@ flutter:
      - assets/teacher.png
      - assets/teacherorstudent.png
      - assets/student.png
+     - assets/assignment.png
+     - assets/attendance.png
+     - assets/internalandsem.png
+     - assets/note.png
+     - assets/notification.png
+     - assets/sem.png
+
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
