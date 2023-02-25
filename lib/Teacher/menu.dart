@@ -10,7 +10,6 @@ class Menupage extends StatelessWidget {
       required this.classname,
       required this.subjectname});
   final controller = Get.put(LoginController());
-  final data = Get.arguments;
   final String teachername;
   final String classname;
   final String subjectname;
@@ -79,7 +78,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Attendance());
+                          Get.to(() =>   Attendance(classname: classname,),);
                         },
                         child: Column(
                           children: [
@@ -105,7 +104,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Attendance());
+                          //Get.to(() =>  );
                         },
                         child: Column(
                           children: [
@@ -131,7 +130,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Attendance());
+                          //Get.to(() =>  Attendance());
                         },
                         child: Column(
                           children: [
@@ -165,7 +164,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Attendance());
+                          //Get.to(() =>  Attendance());
                         },
                         child: Column(
                           children: [
@@ -191,7 +190,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Attendance());
+                          //Get.to(() =>  Attendance());
                         },
                         child: Column(
                           children: [
@@ -217,7 +216,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Attendance());
+                          //Get.to(() => const  Attendance());
                         },
                         child: Column(
                           children: [

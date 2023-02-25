@@ -16,6 +16,7 @@ final subjectname = TextEditingController();
 final formkey = GlobalKey<FormState>();
 
 
+
 void registerclass(String teachername, String classname , String subjectname) async{
   if(formkey.currentState!.validate()) {
     await FirebaseFirestore.instance.collection('Class').doc(teachername).set({

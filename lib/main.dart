@@ -1,5 +1,7 @@
 
 
+import 'package:collegeproject/Teacher/attendance.dart';
+import 'package:collegeproject/Teacher/classlistview.dart';
 import 'package:collegeproject/Teacher/menu.dart';
 import 'package:collegeproject/create_an_account/loginpage.dart';
 
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
       scaffoldBackgroundColor:  const Color.fromARGB(255, 234, 234, 234),),
       initialRoute: 'splashscreen',
       routes: {
-        'splashscreen': (context) =>  Menupage(classname: '', subjectname: '', teachername: '',),
+        'splashscreen': (context) => const Classlistview(),
       },
     );
   }
