@@ -1,10 +1,5 @@
 
-
-import 'package:collegeproject/Teacher/attendance.dart';
-import 'package:collegeproject/Teacher/classlistview.dart';
-import 'package:collegeproject/Teacher/menu.dart';
-import 'package:collegeproject/create_an_account/loginpage.dart';
-
+import 'package:collegeproject/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:collegeproject/Resources/palette.dart';
 import 'package:get/get.dart';
@@ -27,7 +22,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Palette.kToDark,
+      theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const  Color.fromARGB(255, 161, 46, 46),
+          )
+        ),
+        primarySwatch: Palette.kToDark,
       appBarTheme: const AppBarTheme(
         color:    Color.fromARGB(255, 161, 46, 46),
         foregroundColor: Colors.white
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       scaffoldBackgroundColor:  const Color.fromARGB(255, 234, 234, 234),),
       initialRoute: 'splashscreen',
       routes: {
-        'splashscreen': (context) => const Classlistview(),
+        'splashscreen': (context) => const ScreenSplash(),
       },
     );
   }

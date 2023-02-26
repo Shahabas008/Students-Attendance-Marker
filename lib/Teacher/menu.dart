@@ -1,4 +1,5 @@
 import 'package:collegeproject/Teacher/attendance.dart';
+import 'package:collegeproject/Teacher/internalmark.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -104,7 +105,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          //Get.to(() =>  );
+                          Get.to(() =>  Internalmark());
                         },
                         child: Column(
                           children: [

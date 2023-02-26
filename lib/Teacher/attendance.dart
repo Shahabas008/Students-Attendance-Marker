@@ -1,11 +1,10 @@
-
-import 'package:collegeproject/controller/countcontroller.dart';
+import 'package:collegeproject/controller/attendancecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Attendance extends StatelessWidget {
-   Attendance(  {super.key,required this.classname} );
-  final String classname  ;
+  Attendance({super.key, required this.classname});
+  final String classname;
 
   final data = Get.put(Countercontroller());
 
@@ -13,6 +12,7 @@ class Attendance extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         appBar: AppBar(
           title: const Text('Attendance Record'),
         ),
@@ -128,18 +128,17 @@ class Attendance extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(380, 50),
-                      backgroundColor: const Color.fromARGB(255, 161, 46, 46),
-                    ),
-                    onPressed: () {
-                      data.addstudents(context);   
-                    },
-                    child: const Text("ADD STUDENT"))
               ],
             ),
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          elevation: 10,
+          backgroundColor: const Color.fromARGB(255, 161, 46, 46),
+          onPressed: () {
+            data.addstudents(context);
+          },
+          child: const Icon(Icons.add),
         ),
       ),
     );

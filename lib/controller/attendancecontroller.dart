@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collegeproject/controller/createclassdetails.controller.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class Countercontroller extends GetxController {
-
+final data = Get.put(Createclassdetailscontroller());
   
 
 
@@ -43,6 +44,7 @@ class Countercontroller extends GetxController {
             content: Form(
               key: formkey,
               child: TextFormField(
+                controller: studentname,
                 validator: ((value) {
                   if (value!.isEmpty) {
                     return 'The field is required';
@@ -65,7 +67,7 @@ class Countercontroller extends GetxController {
   Future attendancerecoder() async{
     if(formkey.currentState!.validate()){
        await FirebaseFirestore.instance.collection('Attendance Recorder').doc().set({
-      'student Name' : studentname
+      'student Name' : studentname.text
     });
      navigator!.pop();
     }

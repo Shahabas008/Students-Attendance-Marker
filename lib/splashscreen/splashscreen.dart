@@ -18,31 +18,33 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 234, 234, 234),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            children:  [
-              const SizedBox(
-                height: 150,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:const [
-                    Text(
-                    ' STUDENT \n ATTENDANCE \n MARKER',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: const Color.fromARGB(255, 234, 234, 234),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              children:  [
+                const SizedBox(
+                  height: 150,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:const [
+                      Text(
+                      ' STUDENT \n ATTENDANCE \n MARKER',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-             const  SizedBox(height: 250),
-            
-            ],
+                  ],
+                ),
+               const  SizedBox(height: 250),
+              
+              ],
+            ),
           ),
         ),
       ),

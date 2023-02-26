@@ -8,74 +8,76 @@ class Signuppage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Continue as a'),
-      ),
-      backgroundColor: const Color.fromARGB(255, 234, 234, 234),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Row(children: const [
-                Text('We will personalize your experience \n accordingly',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color.fromARGB(255, 173, 171, 171)
-                ),),
-              ]),
-              const SizedBox(
-                height: 120,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [],
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(50, 50),
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                  elevation: 20,
-                  foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Continue as a'),
+        ),
+        backgroundColor: const Color.fromARGB(255, 234, 234, 234),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Row(children: const [
+                  Text('We will personalize your experience \n accordingly',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Color.fromARGB(255, 173, 171, 171)
+                  ),),
+                ]),
+                const SizedBox(
+                  height: 120,
                 ),
-                child: Column(
-                  children: [
-                    Image.asset('assets/teacher.png', width: 100),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text('Teacher'),
-                  ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [],
                 ),
-                onPressed: () {
-                  Get.to(() => const Teacheraccpage1());
-                },
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(50, 50),
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                  elevation: 20,
-                  foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(50, 50),
+                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    elevation: 20,
+                    foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  child: Column(
+                    children: [
+                      Image.asset('assets/teacher.png', width: 100),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Teacher'),
+                    ],
+                  ),
+                  onPressed: () {
+                    Get.to(() => const Teacheraccpage1());
+                  },
                 ),
-                child: Column(
-                  children: [
-                    Image.asset('assets/student.png', width: 100),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text('Student'),
-                  ],
+                const SizedBox(
+                  height: 50,
                 ),
-                onPressed: () {
-                  Get.to(() => const  Studentaccpage1());
-                },
-              ),
-            ],
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(50, 50),
+                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    elevation: 20,
+                    foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  child: Column(
+                    children: [
+                      Image.asset('assets/student.png', width: 100),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Student'),
+                    ],
+                  ),
+                  onPressed: () {
+                    Get.to(() => const  Studentaccpage1());
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
