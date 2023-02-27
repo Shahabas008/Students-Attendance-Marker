@@ -2,8 +2,8 @@ import 'package:collegeproject/controller/attendancecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Attendance extends StatelessWidget {
-  Attendance({super.key, required this.classname});
+class AttendanceTeacher extends StatelessWidget {
+  AttendanceTeacher({super.key, required this.classname});
   final String classname;
 
   final data = Get.put(Countercontroller());
