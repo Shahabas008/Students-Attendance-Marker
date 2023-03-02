@@ -52,6 +52,8 @@ dependencies:
   firebase_storage: ^11.0.14
   syncfusion_flutter_pdfviewer: ^20.4.51
   file_picker: ^5.2.5
+  syncfusion_flutter_calendar: ^20.4.52
+ 
  
   
 

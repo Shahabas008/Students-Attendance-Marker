@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Students/classlistviewstudetnts.dart';
+import 'package:collegeproject/Students/homenotificationstudents.dart';
 import 'package:collegeproject/Teacher/classlistviewteacher.dart';
+import 'package:collegeproject/Teacher/homenotificationteacher.dart';
+import 'package:collegeproject/home/calendar.dart';
 import 'package:collegeproject/home/calendarpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -45,14 +48,14 @@ class _HomepagelayoutState extends State<Homepagelayout> {
 
   final teacherpages = [
     const Classlistviewteacher(),
-    const Calendarpage(),
-    // const notificationpage(),
+    const Calendar(),
+    HomeNotificationteacherpage(),
     // const profilepage(),
   ];
   final studentPages = [
     const Classlistviewstudents(),
-    const Calendarpage(),
-    // const Cartpage(),
+    const Calendar(),
+    HomeNotificationstudentpage(),
     // const Profilepagecustomer(),
   ];
 

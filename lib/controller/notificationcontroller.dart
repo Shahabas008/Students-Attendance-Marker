@@ -52,7 +52,7 @@ class Notificationcontroller extends GetxController{
   void notificationregister() async{
     if(formkey.currentState!.validate()){
           await FirebaseFirestore.instance.collection('Notification').doc().set({
-    "Notification" : notification.text,
+    "Notification" : notification,
    });
     }
     navigator!.pop();
