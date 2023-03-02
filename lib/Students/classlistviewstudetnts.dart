@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collegeproject/Students/menustudents.dart';
 import 'package:collegeproject/Teacher/createclass.dart';
-import 'package:collegeproject/Teacher/createclassdetails.dart';
-import 'package:collegeproject/Teacher/menu.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Classlistview extends StatelessWidget {
-  const Classlistview({super.key});
+class Classlistviewstudents extends StatelessWidget {
+  const Classlistviewstudents({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +25,6 @@ class Classlistview extends StatelessWidget {
                     LoginController.instance.signOut();
                    }, icon: const Icon(Icons.logout))
                    ],
-                    leading: IconButton(
-                        onPressed: () {
-                          Get.to(() => Createclassdetails());
-                        },
-                        icon: const Icon(Icons.add)),
                     centerTitle: true,
                     title: const Text('Classes'),
                   ),
@@ -58,7 +52,7 @@ class Classlistview extends StatelessWidget {
                                     const EdgeInsets.fromLTRB(50, 30, 50, 15),
                                 child: GestureDetector(
                                   onTap: () {
-                                    Get.to(() =>  Menupage(
+                                    Get.to(() =>  StudentMenupage(
                                       teachername : documentSnapshot['Teacher Name'],
                                       classname : documentSnapshot['Class Name'],
                                        subjectname : documentSnapshot['Subject Name']

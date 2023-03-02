@@ -1,14 +1,15 @@
-import 'package:collegeproject/Teacher/attendanceteacher.dart';
-import 'package:collegeproject/Teacher/internalmarkteacher.dart';
-import 'package:collegeproject/Teacher/notesteacher.dart';
-import 'package:collegeproject/Teacher/notificationteacher.dart';
-import 'package:collegeproject/Teacher/semestermarkteacher.dart';
+import 'package:collegeproject/Students/assignmentsstudents.dart';
+import 'package:collegeproject/Students/attendancestudents.dart';
+import 'package:collegeproject/Students/internalmarkstudents.dart';
+import 'package:collegeproject/Students/notesstudents.dart';
+import 'package:collegeproject/Students/notificationstudents.dart';
+import 'package:collegeproject/Students/semesterstudent.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Menupage extends StatelessWidget {
-  Menupage(
+class StudentMenupage extends StatelessWidget {
+  StudentMenupage(
       {super.key,
       required this.teachername,
       required this.classname,
@@ -82,7 +83,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>   AttendanceTeacher(classname: classname,),);
+                          Get.to(() =>   AttendanceStudents(classname: classname,),);
                         },
                         child: Column(
                           children: [
@@ -108,7 +109,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Internalmarkteacher());
+                          Get.to(() =>  Internalmarkstudent());
                         },
                         child: Column(
                           children: [
@@ -134,7 +135,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Semestermarkteacher());
+                          Get.to(() =>  Semestermarkstudent());
                         },
                         child: Column(
                           children: [
@@ -168,7 +169,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Notesteacher());
+                          Get.to(() =>  Notesstudent());
                         },
                         child: Column(
                           children: [
@@ -194,7 +195,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Notificationteacherpage());
+                          Get.to(() =>  Notificationstudentpage());
                         },
                         child: Column(
                           children: [
@@ -220,7 +221,7 @@ class Menupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          //Get.to(() => const  Attendance());
+                          Get.to(() =>   Assignmentstudents());
                         },
                         child: Column(
                           children: [

@@ -1,6 +1,8 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collegeproject/Students/classlistviewstudetnts.dart';
+import 'package:collegeproject/Teacher/classlistviewteacher.dart';
 import 'package:collegeproject/home/calendarpage.dart';
-import 'package:collegeproject/Teacher/menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
@@ -13,53 +15,53 @@ class Homepagelayout extends StatefulWidget {
 }
 
 class _HomepagelayoutState extends State<Homepagelayout> {
-  bool isCustomer = false;
+  bool isTeacher = false;
 
-  // void decider() async {
-  //   DocumentSnapshot currentUser = await FirebaseFirestore.instance
-  //       .collection('Users')
-  //       .doc(FirebaseAuth.instance.currentUser!.email)
-  //       .get();
+  void decider() async {
+    DocumentSnapshot currentUser = await FirebaseFirestore.instance
+        .collection('User')
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .get();
 
-  //   if (currentUser.get("categorys") == "customer") {
-  //     setState(() {
-  //       isCustomer = true;
-  //     });
+    if (currentUser.get("User") == "teacher") {
+      setState(() {
+        isTeacher = true;
+      });
 
-  //     return;
-  //   }
-  //   setState(() {
-  //     isCustomer = false;
-  //   });
-  // }
+      return;
+    }
+    setState(() {
+      isTeacher = false;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    // decider();
+    decider();
   }
 
   int pageIndex = 0;
 
   final teacherpages = [
-     Menupage(teachername: '', classname: '', subjectname: ' ',),
+    const Classlistviewteacher(),
     const Calendarpage(),
     // const notificationpage(),
     // const profilepage(),
   ];
-  // final customerPages = [
-  //   const HomepageCustomer(),
-  //   const Favoritepage(),
-  //   const Cartpage(),
-  //   const Profilepagecustomer(),
-  // ];
+  final studentPages = [
+    const Classlistviewstudents(),
+    const Calendarpage(),
+    // const Cartpage(),
+    // const Profilepagecustomer(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // body: isCustomer ? homepaget[pageIndex] : sellerPages[pageIndex],
-        body:  teacherpages[pageIndex],
+        body: isTeacher ? teacherpages[pageIndex] : studentPages[pageIndex],
+        
         backgroundColor:  const Color.fromARGB(255, 234, 234, 234),
         bottomNavigationBar: Container(
           height: 60,

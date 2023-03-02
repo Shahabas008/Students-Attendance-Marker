@@ -37,28 +37,16 @@ class SignUpController extends GetxController {
     
   }
 
-  //Registering of students details to firestore
-  Future registeruserstudents(String email, String firstname, String lastname) async {
+  //Registering of students/teacher details to firestore
+  Future registeruserstudentsandteacher(String email, String firstname, String lastname , String users)async {
     
       if (formkey.currentState!.validate()) {
-        await FirebaseFirestore.instance.collection('Students').doc(email).set({
+        await FirebaseFirestore.instance.collection('User').doc(email).set({
           "First Name": firstname,
           "Last Name": lastname,
           "E-Mail": email,
+          "User" : users
         });
     }
   }
-
-
-  //Registering of Teacher details to firestore
-  Future registeruserteacher(String email, String firstname, String lastname) async {
-    
-      if (formkey.currentState!.validate()) {
-        await FirebaseFirestore.instance.collection('Teacher').doc(email).set({
-          "First Name": firstname,
-          "Last Name": lastname,
-          "E-Mail": email,
-        });
-  }
-}
 }

@@ -1,5 +1,5 @@
-import 'package:collegeproject/create_an_account/studentaccountfirstpage.dart';
-import 'package:collegeproject/create_an_account/teacheraccountfirstpage.dart';
+import 'package:collegeproject/create_an_account/studentaccountsignup.dart';
+import 'package:collegeproject/create_an_account/teacheraccountsignup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,7 +50,10 @@ class Signuppage extends StatelessWidget {
                     ],
                   ),
                   onPressed: () {
-                    Get.to(() => const Teacheraccpage1());
+                    Get.to(() => const Teacheraccpage1(),
+                    arguments: {
+                      "user" : 'teacher'
+                    });
                   },
                 ),
                 const SizedBox(
@@ -73,7 +76,10 @@ class Signuppage extends StatelessWidget {
                     ],
                   ),
                   onPressed: () {
-                    Get.to(() => const  Studentaccpage1());
+                    Get.to(() => const  Studentaccpage1(),
+                    arguments: {
+                      'user' : 'student'
+                    });
                   },
                 ),
               ],

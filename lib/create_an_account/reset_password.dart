@@ -21,7 +21,7 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
           backgroundColor: const Color.fromARGB(255, 234, 234, 234),
       appBar: AppBar(
         title: const Text('Reset Password'),
-        backgroundColor:const  Color.fromARGB(255, 0, 0, 0),
+       
       ),
       body: Form(
         key: _formKey,
@@ -56,7 +56,7 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(200, 40),
-                      backgroundColor:const  Color.fromARGB(255, 0, 0, 0)
+                      
                     ),
                     child: const Text('Reset Password'),
                     onPressed: () {

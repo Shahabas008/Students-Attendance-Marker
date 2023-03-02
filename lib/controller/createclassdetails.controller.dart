@@ -1,7 +1,5 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collegeproject/Teacher/classlistview.dart';
+import 'package:collegeproject/Teacher/classlistviewteacher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +23,7 @@ void registerclass(String teachername, String classname , String subjectname) as
       "Subject Name" : subjectname,
       
     });
-    Get.to(() => const Classlistview());
+    Get.to(() => const Classlistviewteacher());
   }
 }
 }
