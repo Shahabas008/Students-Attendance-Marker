@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/controller/attendancecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ class AttendanceTeacher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return SafeArea(
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -17,96 +19,41 @@ class AttendanceTeacher extends StatelessWidget {
           title: const Text('Attendance Record'),
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+          child: StreamBuilder(
+            stream: FirebaseFirestore.instance.collection('Attendance Recorder').snapshots(),
+            builder: (context, snapshot) {
+              if(snapshot.hasData){
+                if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+                return const Padding(
+                  padding:  EdgeInsets.fromLTRB(0, 350, 0, 0),
+                  child:  Center(
+                    child: Text('You haven\'t added any students.',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color:  Color.fromARGB(255, 161, 46, 46),
+                    ),),
+                  ),
+                );
+              } 
+              else{
+                return Padding(
+                padding: const EdgeInsets.all(15),
+                child: Column(
                   children: [
-                    Obx(
-                      () => Text(
-                        'Number of days : ${data.count}',
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          data.increment();
-                        },
-                        icon: const Icon(
-                          Icons.add_circle,
-                          color: Colors.green,
-                        )),
-                    IconButton(
-                        onPressed: () {
-                          data.decrement();
-                        },
-                        icon: const Icon(
-                          Icons.remove_circle,
-                          color: Colors.red,
-                        ))
-                  ],
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Table(
-                  columnWidths: const {
-                    0: FlexColumnWidth(4),
-                    1: FlexColumnWidth(4),
-                    2: FlexColumnWidth(1),
-                    3: FlexColumnWidth(1),
-                  },
-                  border: TableBorder.all(
-                      color: const Color.fromARGB(255, 161, 46, 46),
-                      width: 2.5),
-                  children: [
-                    const TableRow(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TableCell(
-                          verticalAlignment: TableCellVerticalAlignment.middle,
-                          child: Center(
-                            child: Text(
-                              'Name',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
+                        Obx(
+                          () => Text(
+                            'Number of days : ${data.count}',
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                         ),
-                        TableCell(
-                          verticalAlignment: TableCellVerticalAlignment.middle,
-                          child: Center(
-                            child: Text(
-                              'Attended',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        TableCell(
-                          verticalAlignment: TableCellVerticalAlignment.middle,
-                          child: Center(child: Icon(Icons.arrow_upward)),
-                        ),
-                        TableCell(
-                          verticalAlignment: TableCellVerticalAlignment.middle,
-                          child: Center(child: Icon(Icons.arrow_downward)),
-                        ),
-                      ],
-                    ),
-                    TableRow(
-                      children: [
-                        const TableCell(
-                            verticalAlignment:
-                                TableCellVerticalAlignment.middle,
-                            child: Center(child: Text('Row 2, Column 1'))),
-                        const TableCell(
-                            verticalAlignment:
-                                TableCellVerticalAlignment.middle,
-                            child: Center(child: Text('Row 2, Column 1'))),
                         IconButton(
                             onPressed: () {
+                              
                               data.increment();
                             },
                             icon: const Icon(
@@ -123,13 +70,94 @@ class AttendanceTeacher extends StatelessWidget {
                             ))
                       ],
                     ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Table(
+                      columnWidths: const {
+                        0: FlexColumnWidth(4),
+                        1: FlexColumnWidth(4),
+                        2: FlexColumnWidth(1),
+                        3: FlexColumnWidth(1),
+                      },
+                      border: TableBorder.all(
+                          color: const Color.fromARGB(255, 161, 46, 46),
+                          width: 2.5),
+                      children: [
+                        const TableRow(
+                          children: [
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Center(
+                                child: Text(
+                                  'Name',
+                                  style: TextStyle(
+                                      fontSize: 15, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Center(
+                                child: Text(
+                                  'Attended',
+                                  style: TextStyle(
+                                      fontSize: 15, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Center(child: Icon(Icons.arrow_upward)),
+                            ),
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Center(child: Icon(Icons.arrow_downward)),
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            const TableCell(
+                                verticalAlignment:
+                                    TableCellVerticalAlignment.middle,
+                                child: Center(child: Text('Row 2, Column 1'))),
+                            const TableCell(
+                                verticalAlignment:
+                                    TableCellVerticalAlignment.middle,
+                                child: Center(child: Text('Row 2, Column 1'))),
+                            IconButton(
+                                onPressed: () {
+                                  data.increment();
+                                },
+                                icon: const Icon(
+                                  Icons.add_circle,
+                                  color: Colors.green,
+                                )),
+                            IconButton(
+                                onPressed: () {
+                                  data.decrement();
+                                },
+                                icon: const Icon(
+                                  Icons.remove_circle,
+                                  color: Colors.red,
+                                ))
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
                   ],
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
-              ],
-            ),
+              );
+              }
+              }
+              else{
+                return const CircularProgressIndicator();
+              }
+            }
           ),
         ),
         floatingActionButton: FloatingActionButton(

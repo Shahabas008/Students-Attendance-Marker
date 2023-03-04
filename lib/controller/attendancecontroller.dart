@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/controller/createclassdetails.controller.dart';
-
+import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class Countercontroller extends GetxController {
 final data = Get.put(Createclassdetailscontroller());
-  
+final databaseReference = FirebaseDatabase.instance.ref();
 
 
   var count = 0.obs;
@@ -66,8 +66,9 @@ final data = Get.put(Createclassdetailscontroller());
 
   Future attendancerecoder() async{
     if(formkey.currentState!.validate()){
-       await FirebaseFirestore.instance.collection('Attendance Recorder').doc().set({
-      'student Name' : studentname.text
+       await FirebaseFirestore.instance.collection('Attendance Recorder').doc(studentname.text).set({
+      'student Name' : studentname.text,
+      "Attended" : 0
     });
      navigator!.pop();
     }
