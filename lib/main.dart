@@ -1,5 +1,5 @@
+import 'package:collegeproject/Teacher/profilepageteacher.dart';
 import 'package:collegeproject/create_an_account/loginpage.dart';
-import 'package:collegeproject/home/calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:collegeproject/Resources/palette.dart';
 import 'package:get/get.dart';
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       scaffoldBackgroundColor:  const Color.fromARGB(255, 234, 234, 234),),
       initialRoute: 'splashscreen',
       routes: {
-        'splashscreen': (context) =>  const Loginpage(),
+        'splashscreen': (context) =>    const  Loginpage(),
       },
     );
   }

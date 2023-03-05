@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Students/classlistviewstudetnts.dart';
 import 'package:collegeproject/Students/homenotificationstudents.dart';
+import 'package:collegeproject/Students/profilestudentpage.dart';
+import 'package:collegeproject/Teacher/profilepageteacher.dart';
 import 'package:collegeproject/Teacher/classlistviewteacher.dart';
 import 'package:collegeproject/Teacher/homenotificationteacher.dart';
 import 'package:collegeproject/home/calendar.dart';
-import 'package:collegeproject/home/calendarpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -50,13 +51,13 @@ class _HomepagelayoutState extends State<Homepagelayout> {
     const Classlistviewteacher(),
     const Calendar(),
     HomeNotificationteacherpage(),
-    // const profilepage(),
+    const Profileteacher(),
   ];
   final studentPages = [
     const Classlistviewstudents(),
     const Calendar(),
     HomeNotificationstudentpage(),
-    // const Profilepagecustomer(),
+    const Profilestudents(),
   ];
 
   @override

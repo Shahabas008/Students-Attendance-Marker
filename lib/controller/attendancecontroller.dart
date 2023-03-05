@@ -8,7 +8,6 @@ class Countercontroller extends GetxController {
 final data = Get.put(Createclassdetailscontroller());
 final databaseReference = FirebaseDatabase.instance.ref();
 
-
   var count = 0.obs;
   void increment() {
     count.value++;
