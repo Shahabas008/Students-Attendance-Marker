@@ -1,19 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Teacher/createclass.dart';
-import 'package:collegeproject/Teacher/createclassdetails.dart';
 import 'package:collegeproject/Teacher/menuteacher.dart';
-import 'package:collegeproject/controller/login_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:collegeproject/controller/createclassdetails.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Classlistviewteacher extends StatelessWidget {
-  const Classlistviewteacher({super.key});
+class Myclassespage extends StatelessWidget {
+  const Myclassespage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final data = Get.put(Createclassdetailscontroller());
      return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('Class').doc(FirebaseAuth.instance.currentUser!.email).collection('i').snapshots(),
+        stream: FirebaseFirestore.instance.collection('Class').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.docs.isEmpty || snapshot.data == null) {
@@ -22,18 +21,8 @@ class Classlistviewteacher extends StatelessWidget {
               return SafeArea(
                 child: Scaffold(
                   appBar: AppBar(
-                   actions: [
-                   IconButton(onPressed: () {
-                    LoginController.instance.signOut();
-                   }, icon: const Icon(Icons.logout))
-                   ],
-                    leading: IconButton(
-                        onPressed: () {
-                          Get.to(() => Createclassdetails());
-                        },
-                        icon: const Icon(Icons.add)),
                     centerTitle: true,
-                    title: const Text('Classes'),
+                    title: const Text('My classes'),
                   ),
                   body: SingleChildScrollView(
                     physics: const ScrollPhysics(),
@@ -41,10 +30,6 @@ class Classlistviewteacher extends StatelessWidget {
                       children: <Widget>[
                         const SizedBox(
                           height: 15,
-                        ),
-                        const Text(
-                          'Select One Card To View ',
-                          style: TextStyle(fontSize: 18, color: Colors.grey),
                         ),
                         ListView.builder(
                             shrinkWrap: true,

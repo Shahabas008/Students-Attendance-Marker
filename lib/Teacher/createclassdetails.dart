@@ -11,7 +11,7 @@ class Createclassdetails extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('class Details'),
+          title: const Text('Class Details'),
         ),
         body: SingleChildScrollView(
           child: Padding(
