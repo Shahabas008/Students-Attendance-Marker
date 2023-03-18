@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collegeproject/Teacher/classlistviewteacher.dart';
 import 'package:collegeproject/home/appbar_bottomnavteacher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,13 @@ final currentuser = FirebaseAuth.instance.currentUser!.email;
 
 void registerclass(String teachername, String classname , String subjectname) async{
   if(formkey.currentState!.validate()) {
-    await FirebaseFirestore.instance.collection('Class').doc(currentuser).collection('i').add({
+    await FirebaseFirestore.instance.collection('Class').add({
+      "Teacher Name" : teachername,
+      "Class Name" : classname,
+      "Subject Name" : subjectname,
+      
+    });
+       await FirebaseFirestore.instance.collection('User-Class').doc(currentuser).collection('My-Class').add({
       "Teacher Name" : teachername,
       "Class Name" : classname,
       "Subject Name" : subjectname,

@@ -1,4 +1,5 @@
 import 'package:collegeproject/Teacher/myclasses.dart';
+import 'package:collegeproject/Teacher/mynotificationteacher.dart';
 import 'package:collegeproject/Teacher/profilepageteacher.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/profilecontrollerpage.dart';
@@ -114,13 +115,13 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                       color: Colors.white,
                       child:  ListTile(
                         onTap: () {
-                          
+                          Get.to(() => const Mynotificationteacher());
                         },
                         leading:const Icon(
                           Icons.notifications,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('            Notifications',
+                        title: const Text('           My Notifications',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             )),

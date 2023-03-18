@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Students/classlistviewstudetnts.dart';
 import 'package:collegeproject/Students/homenotificationstudents.dart';
-import 'package:collegeproject/Students/Accountpagestudemt.dart';
+import 'package:collegeproject/Students/accountpagestudent.dart';
 import 'package:collegeproject/Teacher/accountpageteacher.dart';
 import 'package:collegeproject/Teacher/classlistviewteacher.dart';
 import 'package:collegeproject/Teacher/homenotificationteacher.dart';

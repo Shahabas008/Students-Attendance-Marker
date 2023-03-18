@@ -79,7 +79,7 @@ class HomeNotificationcontroller extends GetxController{
   }
   //uploading the notification download url to the firestore database 
   void notificationregister() async{
-     var now = DateTime.now();
+    var now = DateTime.now();
     var month = now.month.toString().padLeft(2, '0');
     var day = now.day.toString().padLeft(2, '0');
     var time = '${now.hour}:${now.minute}  ${now.year}-$month-$day ';
