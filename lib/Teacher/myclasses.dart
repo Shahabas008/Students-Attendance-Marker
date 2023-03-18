@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Teacher/menuteacher.dart';
-import 'package:collegeproject/controller/createclassdetails.controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,6 @@ class Myclassespage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = Get.put(Createclassdetailscontroller());
      return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('User-Class').doc(FirebaseAuth.instance.currentUser!.email).collection('My-Class').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
