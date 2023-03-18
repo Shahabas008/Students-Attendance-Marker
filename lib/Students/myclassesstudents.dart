@@ -1,30 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collegeproject/Teacher/menuteacher.dart';
+import 'package:collegeproject/Students/menustudents.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Myclassespage extends StatelessWidget {
-  const Myclassespage({super.key});
+class MYclassstudents extends StatelessWidget {
+  const MYclassstudents({super.key});
 
   @override
   Widget build(BuildContext context) {
      return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('User-Class').doc(FirebaseAuth.instance.currentUser!.email).collection('My-Class').snapshots(),
+        stream: FirebaseFirestore.instance.collection('User-Student-classes').doc(FirebaseAuth.instance.currentUser!.email).collection('My-classes').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.docs.isEmpty || snapshot.data == null) {
-              return  Scaffold(
-                appBar: AppBar(
-                  title:const  Text('My Classes'),
-                ),
-                body: const  Center(
-                  child: Text('You haven\'t added any classes',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color:  Color.fromARGB(255, 161, 46, 46),
-                    ),),
+              return  SafeArea(
+                child: Scaffold(
+                  appBar: AppBar(
+                    title:const  Text('My Classes'),
+                  ),
+                  body:const   Center(
+                    child: Text('You haven\'t added any classes',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color:  Color.fromARGB(255, 161, 46, 46),
+                      ),),
+                  ),
                 ),
               );
             } else {
@@ -54,7 +56,7 @@ class Myclassespage extends StatelessWidget {
                                     const EdgeInsets.fromLTRB(50, 30, 50, 15),
                                 child: GestureDetector(
                                   onTap: () {
-                                    Get.to(() =>  TeacherMenupage(
+                                    Get.to(() =>  StudentMenupage(
                                       teachername : documentSnapshot['Teacher Name'],
                                       classname : documentSnapshot['Class Name'],
                                        subjectname : documentSnapshot['Subject Name']

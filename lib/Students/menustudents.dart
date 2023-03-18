@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Students/assignmentsstudents.dart';
 import 'package:collegeproject/Students/attendancestudents.dart';
 import 'package:collegeproject/Students/internalmarkstudents.dart';
@@ -5,6 +6,7 @@ import 'package:collegeproject/Students/notesstudents.dart';
 import 'package:collegeproject/Students/notificationstudents.dart';
 import 'package:collegeproject/Students/semesterstudent.dart';
 import 'package:collegeproject/controller/login_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +26,13 @@ class StudentMenupage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    addtomyclasses();
+                  },
+                  icon: const Icon(Icons.add))
+            ],
             centerTitle: true,
             title: Text(
               subjectname,
@@ -83,7 +92,11 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>   AttendanceStudents(classname: classname,),);
+                          Get.to(
+                            () => AttendanceStudents(
+                              classname: classname,
+                            ),
+                          );
                         },
                         child: Column(
                           children: [
@@ -109,7 +122,7 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Internalmarkstudent());
+                          Get.to(() => Internalmarkstudent());
                         },
                         child: Column(
                           children: [
@@ -135,7 +148,7 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Semestermarkstudent());
+                          Get.to(() => Semestermarkstudent());
                         },
                         child: Column(
                           children: [
@@ -169,7 +182,7 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Notesstudent());
+                          Get.to(() => Notesstudent());
                         },
                         child: Column(
                           children: [
@@ -195,7 +208,7 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>  Notificationstudentpage());
+                          Get.to(() => Notificationstudentpage());
                         },
                         child: Column(
                           children: [
@@ -221,7 +234,7 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() =>   Assignmentstudents());
+                          Get.to(() => Assignmentstudents());
                         },
                         child: Column(
                           children: [
@@ -248,5 +261,31 @@ class StudentMenupage extends StatelessWidget {
             ),
           ))),
     );
+  }
+
+  //adding the students class to my class page on account page
+  void addtomyclasses() async {
+    final currentuser = FirebaseAuth.instance.currentUser!.email;
+    await FirebaseFirestore.instance
+        .collection('User-Student-classes')
+        .doc(currentuser)
+        .collection('My-classes')
+        .add({
+      "Teacher Name": teachername,
+      "Class Name": classname,
+      "Subject Name": subjectname,
+    });
+    Get.showSnackbar(const GetSnackBar(
+      borderRadius: 8,
+      padding: EdgeInsets.all(20),
+      messageText: Text(
+        'Added to My classes',
+        style: TextStyle(
+          color: Color.fromARGB(255, 161, 46, 46),
+        ),
+      ),
+      duration: Duration(seconds: 3),
+      backgroundColor: Colors.white,
+    ));
   }
 }

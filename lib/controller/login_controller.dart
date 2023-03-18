@@ -1,3 +1,4 @@
+import 'package:collegeproject/create_an_account/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -72,6 +73,7 @@ class LoginController extends GetxController {
   ///sign out code
   Future signOut() async {
     await _auth.signOut();
+    Get.offAll(() => const Loginpage());
 
   }
 }
