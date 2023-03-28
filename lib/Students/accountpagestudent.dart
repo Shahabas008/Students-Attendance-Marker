@@ -18,23 +18,27 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
   final data = Get.put(LoginController());
   final data1 = Get.put(Profilepagecontroller());
   final data2 = Get.put(SignUpController());
-  User user = FirebaseAuth.instance.currentUser!;
+   String firstname = '';
+  String lastname = '';
+  String email = '';
+  String profileurl = ''
+;  User user = FirebaseAuth.instance.currentUser!;
 
   @override
   void initState() {
     super.initState();
     data1.collectionreferenceuser.doc(data1.currentUser).get().then((value) {
       setState(() {
-        data1.firstname = value['First Name'];
-        data1.lastname = value['Last Name'];
-        data1.email = value['E-Mail'];
+        firstname = value['First Name'];
+        lastname = value['Last Name'];
+        email = value['E-Mail'];
       });
       data1.collectionreferenceprofile
           .doc(data1.currentUser)
           .get()
           .then((value) {
         setState(() {
-          data1.profileurl = value['Profile Picture'];
+          profileurl = value['Profile Picture'];
         });
       });
     });
@@ -69,8 +73,8 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                     height: 200,
                     color: const Color.fromARGB(255, 161, 46, 46),
                   ),
-                  Positioned(top: 120, child: data1.buildprofilecover()),
-                  Positioned(top: 30, child: data1.buildusername()),
+                  Positioned(top: 120, child: buildprofilecover()),
+                  Positioned(top: 30, child: buildusername()),
                 ],
               ),
               const SizedBox(
@@ -111,24 +115,6 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
                         title: const Text('             My Classes',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
-                        trailing: const Icon(Icons.arrow_forward),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
-                    child: Container(
-                      color: Colors.white,
-                      child: ListTile(
-                        onTap: () {},
-                        leading: const Icon(
-                          Icons.notifications,
-                          color: Color.fromARGB(255, 161, 46, 46),
-                        ),
-                        title: const Text('            Notifications',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             )),
@@ -221,6 +207,39 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
           ),
         ),
       ),
+    );
+  }
+  Widget buildprofilecover() {
+    return GestureDetector(
+      onTap: () {
+        data1.showPicker(context);
+      },
+      child: Container(
+       decoration: BoxDecoration(
+         color: const Color.fromARGB(255, 234, 234, 234),
+          borderRadius: BorderRadius.circular(10)
+        
+       ),
+        height: 150,
+        width: 140,
+       
+        child: SizedBox(
+          height: 130,
+          width: 200,
+          child:profileurl == ''
+              ? Image.asset('assets/user.jpg')
+              : Image.network(
+                  profileurl,
+                ),
+        ),
+      ),
+    );
+  }
+  Widget buildusername() {
+    return Text(
+      '$firstname $lastname',
+      style: const TextStyle(
+          fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
     );
   }
 }

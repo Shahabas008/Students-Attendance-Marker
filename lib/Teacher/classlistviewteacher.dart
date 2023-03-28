@@ -20,6 +20,7 @@ class Classlistviewteacher extends StatelessWidget {
               return SafeArea(
                 child: Scaffold(
                   appBar: AppBar(
+
                     leading: IconButton(
                         onPressed: () {
                           Get.to(() => Createclassdetails());
@@ -125,7 +126,7 @@ class Classlistviewteacher extends StatelessWidget {
             }
           } else {
             return const Center(
-              child: Text('Something Wrong'),
+              child: Text('Soasdlmasdkfn'),
             );
           }
         },

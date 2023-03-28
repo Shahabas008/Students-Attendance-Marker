@@ -1,5 +1,3 @@
-import 'package:collegeproject/Students/accountpagestudent.dart';
-import 'package:collegeproject/Students/menustudents.dart';
 import 'package:collegeproject/create_an_account/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:collegeproject/Resources/palette.dart';

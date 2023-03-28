@@ -42,8 +42,10 @@ class Internalmarkteacher extends StatelessWidget {
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
                         return Card(
-                          elevation: 5,
-                          child: Text(x['PDF download url']));
+                          
+                          child: GestureDetector(
+                            onTap: () => const View(),
+                            child: Text(x['PDF name'])));
                       }),
                 );
               }

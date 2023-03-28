@@ -86,39 +86,7 @@ class Profilepagecontroller extends GetxController {
         });
         
   }
-   Widget buildprofilecover() {
-    return GestureDetector(
-      onTap: () {
-        showPicker(context);
-      },
-      child: Container(
-       decoration: BoxDecoration(
-         color: const Color.fromARGB(255, 234, 234, 234),
-          borderRadius: BorderRadius.circular(10)
-        
-       ),
-        height: 150,
-        width: 140,
-       
-        child: SizedBox(
-          height: 130,
-          width: 200,
-          child:profileurl == ''
-              ? Image.asset('assets/user.jpg')
-              : Image.network(
-                  profileurl,
-                ),
-        ),
-      ),
-    );
-  }
+   
 
-  
-  Widget buildusername() {
-    return Text(
-      '$firstname $lastname',
-      style: const TextStyle(
-          fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-    );
-  }
+
 }
