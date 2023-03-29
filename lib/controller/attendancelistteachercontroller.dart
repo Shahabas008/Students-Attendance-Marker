@@ -1,10 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class AttendanceListTeacherController extends GetxController {
-  RxList<Map> attendance = [{"absent": false, "present": false, "late": false}].obs;
+  RxMap attendance = {}.obs;
 
-  void setAttendanceList(int listLength) {
-    attendance.removeLast();
-    attendance.value = List<Map>.generate(listLength, (i) =>{"absent": false, "present": false, "late": false} );
+  void setAttendanceList(List<QueryDocumentSnapshot> list) {
+    for (int i=0;i<list.length;i++) {
+      attendance.addAll({list[i].get('student Name'): {"absent": false, "present": false, "late": false}});
+    }
+    attendance.refresh();
+  }
+
+  Future submit() async {
+    await FirebaseFirestore.instance.collection("attendance_list").add({"attendance": attendance});
   }
 }

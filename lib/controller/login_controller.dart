@@ -9,7 +9,7 @@ class LoginController extends GetxController {
   /// TextField Controllers to get data from TextFields
   final email = TextEditingController();
   final password = TextEditingController();
-  final formkey = GlobalKey<FormState>();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   /// Authentication of the user(whether the user is signed in or not) and validation
   final _auth = FirebaseAuth.instance;
@@ -66,6 +66,6 @@ class LoginController extends GetxController {
   ///sign out code
   Future signOut() async {
     await _auth.signOut();
-    Get.offAll(() => const Loginpage());
+    Get.off(() => const Loginpage());
   }
 }

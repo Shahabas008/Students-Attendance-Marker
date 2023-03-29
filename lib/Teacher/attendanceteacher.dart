@@ -1,174 +1,104 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collegeproject/Teacher/attendacelisteacher.dart';
 import 'package:collegeproject/controller/attendancecontroller.dart';
+import 'package:collegeproject/controller/attendanceteachercontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:intl/intl.dart';
 
-class AttendanceTeacher extends StatelessWidget {
-  AttendanceTeacher({super.key, required this.classname});
-  final String classname;
+class AttendanceTeacher extends StatefulWidget {
+  const AttendanceTeacher({super.key});
 
+  @override
+  AttendanceTeacherState createState() => AttendanceTeacherState();
+}
+
+class AttendanceTeacherState extends State<AttendanceTeacher> {
+  final controller = Get.put(AttendanceTeacherController());
+  
+  
   final data = Get.put(Countercontroller());
+  String? selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
       child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        appBar: AppBar(
-          title: const Text('Attendance Record'),
-        ),
-        body: SingleChildScrollView(
-          child: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('Attendance Recorder').snapshots(),
-            builder: (context, snapshot) {
-              if(snapshot.hasData){
-                if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-                return const Padding(
-                  padding:  EdgeInsets.fromLTRB(0, 350, 0, 0),
-                  child:  Center(
-                    child: Text('You haven\'t added any students.',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color:  Color.fromARGB(255, 161, 46, 46),
-                    ),),
-                  ),
-                );
-              } 
-              else{
-                return Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Obx(
-                          () => Text(
-                            'Number of days : ${data.count}',
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              
-                              data.increment();
-                            },
-                            icon: const Icon(
-                              Icons.add_circle,
-                              color: Colors.green,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              data.decrement();
-                            },
-                            icon: const Icon(
-                              Icons.remove_circle,
-                              color: Colors.red,
-                            ))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Table(
-                      columnWidths: const {
-                        0: FlexColumnWidth(4),
-                        1: FlexColumnWidth(4),
-                        2: FlexColumnWidth(1),
-                        3: FlexColumnWidth(1),
-                      },
-                      border: TableBorder.all(
-                          color: const Color.fromARGB(255, 161, 46, 46),
-                          width: 2.5),
-                      children: [
-                        const TableRow(
-                          children: [
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.middle,
-                              child: Center(
-                                child: Text(
-                                  'Name',
-                                  style: TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.middle,
-                              child: Center(
-                                child: Text(
-                                  'Attended',
-                                  style: TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.middle,
-                              child: Center(child: Icon(Icons.arrow_upward)),
-                            ),
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.middle,
-                              child: Center(child: Icon(Icons.arrow_downward)),
-                            ),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            const TableCell(
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                                child: Center(child: Text('Row 2, Column 1'))),
-                            const TableCell(
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                                child: Center(child: Text('Row 2, Column 1'))),
-                            IconButton(
-                                onPressed: () {
-                                  data.increment();
-                                },
-                                icon: const Icon(
-                                  Icons.add_circle,
-                                  color: Colors.green,
-                                )),
-                            IconButton(
-                                onPressed: () {
-                                  data.decrement();
-                                },
-                                icon: const Icon(
-                                  Icons.remove_circle,
-                                  color: Colors.red,
-                                ))
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                  ],
+        appBar: AppBar(),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: controller.dates.map((element) => MaterialButton(
+              child:Container(
+                  child: controller.dates.isEmpty
+                      ? const Text('Select a date ')
+                      : Text(element)
                 ),
-              );
-              }
-              }
-              else{
-                return const CircularProgressIndicator();
-              }
-            }
-          ),
+              onPressed: () {
+                Get.to(() => const Attendancelistteacher());
+              },
+            )).toList(),
         ),
         floatingActionButton: FloatingActionButton(
-          elevation: 10,
-          backgroundColor: const Color.fromARGB(255, 161, 46, 46),
-          onPressed: () {
-            data.addstudents(context);
-          },
-          child: const Icon(Icons.add),
-        ),
+            backgroundColor: const Color.fromARGB(255, 161, 46, 46),
+            onPressed: () {
+              opencalendar(context);
+            },
+            child: const Icon(Icons.add)),
       ),
     );
   }
+
+  //pop calendar 
+
+  void selectionChanged(DateRangePickerSelectionChangedArgs args) {
+    selectedDate = DateFormat('dd MMMM, yyyy').format(args.value);
+    controller.addDate(selectedDate);
+
+    SchedulerBinding.instance.addPostFrameCallback((duration) {
+      setState(() {});
+    });
+  }
+
+  Widget getDateRangePicker() {
+    return SizedBox(
+        height: 250,
+        width: 350,
+        child: Card(
+            child: SfDateRangePicker(
+          view: DateRangePickerView.month,
+          selectionMode: DateRangePickerSelectionMode.single,
+          onSelectionChanged: selectionChanged,
+        )));
+  }
+
+  void opencalendar(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: const Text('Select a Date'),
+              content: SizedBox(
+                height: 350,
+                width: 350,
+                child: Column(
+                  children: <Widget>[
+                    getDateRangePicker(),
+                    MaterialButton(
+                      child: const Text("OK"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    )
+                  ],
+                ),
+              ));
+        });
+  }
+
 }

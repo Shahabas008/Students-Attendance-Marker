@@ -56,7 +56,7 @@ dependencies:
   firebase_database: ^10.0.14
   image_picker: ^0.8.6
   path: ^1.8.0
- 
+  syncfusion_flutter_datepicker: ^21.1.35 
  
   
 

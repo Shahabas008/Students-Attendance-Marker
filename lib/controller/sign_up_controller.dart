@@ -13,7 +13,7 @@ class SignUpController extends GetxController {
   final firstname = TextEditingController();
   final lastname = TextEditingController();
   final phoneNo = TextEditingController();
-  final formkey = GlobalKey<FormState>();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
   bool obscureText = true;
 
   //creating sign up account for the studetns and teachers and validation
@@ -21,7 +21,7 @@ class SignUpController extends GetxController {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-          Get.to(() => const Homepagelayout());
+          Get.off(const Homepagelayout());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         Get.showSnackbar(const GetSnackBar(

@@ -37,11 +37,19 @@ void initState() {
           child: Column(
            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Name',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),),
+              Row(
+                children:  [
+                  const Text('Name',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                  ),),
+                  IconButton(onPressed: (){
+                    //updating the email
+                  }, icon:const Icon(Icons.update))
+                  
+                ],
+              ),
               const SizedBox(
                 height: 10,
               ),

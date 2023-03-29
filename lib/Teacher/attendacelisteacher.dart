@@ -12,50 +12,79 @@ class Attendancelistteacher extends StatefulWidget {
 
 class AattendancelistteacherState extends State<Attendancelistteacher> {
   final controller = Get.put(AttendanceListTeacherController());
-  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('Attendance Recorder')
-            .snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          controller.setAttendanceList(snapshot.data!.docs.length);
-          return ListView.builder(
-            itemBuilder: (context, index) {
-          DocumentSnapshot x = snapshot.data!.docs[index];
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(x['student Name']),
-              Checkbox(  
-  value: controller.attendance[index]["absent"],
-  onChanged: (bool? value) {  
-    controller.attendance[index]["absent"] = value;
-  },  
-),
-//               Checkbox(  
-//   value: index <= controller.attendance.length ? controller.attendance[index]["present"] : 0,   
-//   onChanged: (bool? value) {  
-//     controller.attendance[index]["present"] = value;
-//   },  
-// ),
-//               Checkbox(  
-//   value: index <= controller.attendance.length ? controller.attendance[index]["late"] : 0,   
-//   onChanged: (bool? value) {  
-//     controller.attendance[index]["late"] = value;
-//   },  
-// ),
-            ],
-          );
+          appBar: AppBar(),
+          body: Column(
+            children:[
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Attendance Recorder')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasData) {
+                      controller.setAttendanceList(snapshot.data!.docs);
+                    }
+                    return ListView.builder(
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot x = snapshot.data!.docs[index];
+                        return Obx(() {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(x['student Name']),
+                              Checkbox(
+                                value: controller.attendance[x['student Name']]["absent"],
+                                onChanged: (bool? value) {
+                                  controller.attendance[x['student Name']]["absent"] = value;
+                                  controller.attendance.refresh();
+                                },
+                              ),
+                              Checkbox(
+                                value: index <= controller.attendance.length
+                                    ? controller.attendance[x['student Name']]["present"]
+                                    : 0,
+                                onChanged: (bool? value) {
+                                  controller.attendance[x['student Name']]["present"] = value;
+                                  controller.attendance.refresh();
+                                },
+                              ),
+                              Checkbox(
+                                value: index <= controller.attendance.length
+                                    ? controller.attendance[x['student Name']]["late"]
+                                    : 0,
+                                onChanged: (bool? value) {
+                                  controller.attendance[x['student Name']]["late"] = value;
+                                  controller.attendance.refresh();
+                                },
+                              ),
+                            ],
+                          );
+                        });
+                      },
+                      itemCount: snapshot.data == null ? 0 : snapshot.data!.docs
+                          .length,
+                    );
+                  },
+                ),
+              ),
+        SizedBox(
+          child: ElevatedButton(
+
+            onPressed: () {
+controller.submit();
             },
-            itemCount: snapshot.data == null ? 0 : snapshot.data!.docs.length,
-          );
-        },
-      ),
-    ));
+            child: Text("Submit"),
+          ),
+        )
+            ]
+          ),
+        )
+);
   }
 }
