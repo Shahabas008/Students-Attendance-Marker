@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Createclassdetailscontroller extends GetxController{
-  static Createclassdetailscontroller get instance => Get.find();
 
 
 ///Textformfield variable declaration
@@ -25,13 +24,13 @@ void registerclass(String teachername, String classname , String subjectname) as
       "Subject Name" : subjectname,
       
     });
-       await FirebaseFirestore.instance.collection('User-Class').doc(currentuser).collection('My-Class').add({
+       await FirebaseFirestore.instance.collection('User').doc(currentuser).collection('Teacher-Class').add({
       "Teacher Name" : teachername,
       "Class Name" : classname,
       "Subject Name" : subjectname,
       
     });
-    Get.to(() => const Homepagelayout());
+    Get.offAll(() => const Homepagelayout());
   }
 }
 }

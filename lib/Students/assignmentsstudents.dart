@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/controller/markcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+// import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class Assignmentstudents extends StatelessWidget {
    Assignmentstudents({super.key});
@@ -64,23 +64,23 @@ class Assignmentstudents extends StatelessWidget {
   }
 }
 
-class View extends StatelessWidget {
-   View({super.key});
+// class View extends StatelessWidget {
+//    View({super.key});
 
-  final _pdfViewerController = PdfViewerController();
+//   final _pdfViewerController = PdfViewerController();
 
-  final data = Get.put(Markcontroller());
+//   final data = Get.put(Markcontroller());
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('pdf viewer'),
-      ),
-      body: SfPdfViewer.network(
-        data.pdfurl,
-        controller: _pdfViewerController,
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('pdf viewer'),
+//       ),
+//       body: SfPdfViewer.network(
+//         data.pdfurl,
+//         controller: _pdfViewerController,
+//       ),
+//     );
+//   }
+// }

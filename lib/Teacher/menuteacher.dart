@@ -248,7 +248,17 @@ class TeacherMenupage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 190,
+                    height: 150,
+                  ),
+                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(350,50)
+                    ),
+                    onPressed: () {
+                    //view students list 
+                  }, child:const Text("Students List ")),
+                  const SizedBox(
+                    height: 1,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(

@@ -158,7 +158,7 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                           onPressed: () {
                             SignUpController.instance
                                 .createuser(data.email.text, data.password.text);
-                            SignUpController.instance.registeruserstudentsandteacher(
+                            SignUpController.instance.registeruserteacherandstudent(
                                 data.email.text,
                                 data.firstname.text,
                                 data.lastname.text,

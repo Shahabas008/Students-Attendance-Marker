@@ -28,7 +28,7 @@ class _ProfileteacherState extends State<Accountpageteacher> {
   @override
   void initState() {
     super.initState();
-    data1.collectionreferenceuser.doc(data1.currentUser).get().then((value) {
+    data1.collectionreferenceuser.doc(FirebaseAuth.instance.currentUser!.email).get().then((value) {
       setState(() {
         firstname = value['First Name'];
         lastname = value['Last Name'];

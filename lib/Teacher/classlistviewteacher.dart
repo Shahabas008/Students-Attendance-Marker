@@ -2,16 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Teacher/createclass.dart';
 import 'package:collegeproject/Teacher/createclassdetails.dart';
 import 'package:collegeproject/Teacher/menuteacher.dart';
+import 'package:collegeproject/controller/createclassdetails.controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Classlistviewteacher extends StatelessWidget {
-  const Classlistviewteacher({super.key});
+     Classlistviewteacher({super.key});
+  final data = Get.put(Createclassdetailscontroller());
 
   @override
   Widget build(BuildContext context) {
      return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('Class').snapshots(),
+        stream: FirebaseFirestore.instance.collection('User').doc(FirebaseAuth.instance.currentUser!.email).collection('Teacher-Class').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.docs.isEmpty || snapshot.data == null) {

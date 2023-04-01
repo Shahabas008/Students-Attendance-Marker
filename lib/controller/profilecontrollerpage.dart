@@ -10,15 +10,15 @@ import 'package:path/path.dart';
 class Profilepagecontroller extends GetxController {
   File? _image;
   String downloadUrls = '';
-    CollectionReference collectionreferenceuser =
+  CollectionReference collectionreferenceuser =
       FirebaseFirestore.instance.collection('User');
   CollectionReference collectionreferenceprofile =
       FirebaseFirestore.instance.collection('Users-Profile-Picture');
   final currentUser = FirebaseAuth.instance.currentUser!.email;
-  String profileurl = '' ;
+  String profileurl = '';
   String firstname = '';
-  String lastname = '' ;
-  String email = '' ;
+  String lastname = '';
+  String email = '';
 
   final ImagePicker picker = ImagePicker();
   Future selectOrTakePhoto(ImageSource imageSource) async {
@@ -45,11 +45,9 @@ class Profilepagecontroller extends GetxController {
       final auth = FirebaseAuth.instance;
       final user = auth.currentUser!.email;
       await FirebaseFirestore.instance
-          .collection('Users-Profile-Picture')
+          .collection('User')
           .doc(user)
-          .set({
-        "Profile Picture": downloadUrls,
-      });
+          .set({"Profile-Picture": downloadUrls});
     } on FirebaseException catch (e) {
       print(e);
     }
@@ -84,9 +82,5 @@ class Profilepagecontroller extends GetxController {
             ),
           );
         });
-        
   }
-   
-
-
 }

@@ -50,13 +50,14 @@ dependencies:
   firebase_auth: ^4.2.8
   cloud_firestore: ^4.4.3
   firebase_storage: ^11.0.14
-  syncfusion_flutter_pdfviewer: ^20.4.51
+  # syncfusion_flutter_pdfviewer: ^20.4.51
   file_picker: ^5.2.5
-  syncfusion_flutter_calendar: ^20.4.52
+  # syncfusion_flutter_calendar: ^20.4.52
   firebase_database: ^10.0.14
   image_picker: ^0.8.6
   path: ^1.8.0
   syncfusion_flutter_datepicker: ^21.1.35 
+  google_sign_in: ^6.0.2
  
   
 

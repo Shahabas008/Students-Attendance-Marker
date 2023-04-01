@@ -2,8 +2,6 @@ import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/create_an_account/reset_password.dart';
 import 'package:collegeproject/create_an_account/signup.dart';
 import 'package:collegeproject/home/appbar_bottomnavteacher.dart';
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +15,7 @@ class Loginpage extends StatefulWidget {
 
 class _LoginpageState extends State<Loginpage> {
   final controller = Get.put(LoginController());
+
 
   @override
   Widget build(BuildContext context) {

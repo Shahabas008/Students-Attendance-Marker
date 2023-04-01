@@ -155,7 +155,7 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                           style: ElevatedButton.styleFrom(
                               minimumSize: const Size(350, 50)),
                           onPressed: () async {
-                            SignUpController.instance.registeruserstudentsandteacher(
+                            SignUpController.instance.registeruserteacherandstudent(
                                 data.email.text,
                                 data.firstname.text,
                                 data.lastname.text,
