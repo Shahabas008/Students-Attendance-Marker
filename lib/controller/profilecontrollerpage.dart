@@ -12,8 +12,6 @@ class Profilepagecontroller extends GetxController {
   String downloadUrls = '';
   CollectionReference collectionreferenceuser =
       FirebaseFirestore.instance.collection('User');
-  CollectionReference collectionreferenceprofile =
-      FirebaseFirestore.instance.collection('Users-Profile-Picture');
   final currentUser = FirebaseAuth.instance.currentUser!.email;
   String profileurl = '';
   String firstname = '';
@@ -40,14 +38,12 @@ class Profilepagecontroller extends GetxController {
       final uploadimage =
           FirebaseStorage.instance.ref(destination).child('Profile Picture/');
       await uploadimage.putFile(_image!);
-
       downloadUrls = await uploadimage.getDownloadURL();
-      final auth = FirebaseAuth.instance;
-      final user = auth.currentUser!.email;
       await FirebaseFirestore.instance
           .collection('User')
-          .doc(user)
-          .set({"Profile-Picture": downloadUrls});
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .set({"Profile-Picture": downloadUrls},
+          SetOptions(merge: true));
     } on FirebaseException catch (e) {
       print(e);
     }

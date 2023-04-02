@@ -1,47 +1,54 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/controller/markcontroller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class Assignmentstudents extends StatelessWidget {
-   Assignmentstudents({super.key});
+  Assignmentstudents({super.key});
   final data = Get.put(Markcontroller());
+  final subname = Get.arguments["subjectname"];
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Assignment'),
         ),
-        body: StreamBuilder(
+        body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
-              .collection('Assignments')
+              .collection('User')
+              .doc(FirebaseAuth.instance.currentUser!.email)
+              .collection('Subject')
+              .doc(subname)
+              .collection("Assignment")
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
                 return const Center(
-                 child: Text('There is no Assignments to display',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color:  Color.fromARGB(255, 161, 46, 46),
-                  ),),
+                  child: Text(
+                    'There is no Assignments to display',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 161, 46, 46),
+                    ),
+                  ),
                 );
               } else {
                 return Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: ListView.builder(
-                      
                       shrinkWrap: true,
                       itemCount: snapshot.data == null
                           ? 0
                           : snapshot.data!.docs.length,
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
-                        return Text(x['PDF download url']);
+                        return Card(
+                            elevation: 5, child: Text(x['PDF name']));
                       }),
                 );
               }
@@ -57,10 +64,21 @@ class Assignmentstudents extends StatelessWidget {
             child: const Icon(Icons.add),
             onPressed: () {
               data.selectdocument();
-              data.assignmentsregister();
+              assignmentsregister();
             }),
       ),
     );
+  }
+
+  //uploading the assignments download url to the firestore database
+  void assignmentsregister() async {
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection("Subject")
+        .doc(subname)
+        .collection("Assignment")
+        .add({"PDF download url": data.pdfurl, "PDF name": data.filename});
   }
 }
 

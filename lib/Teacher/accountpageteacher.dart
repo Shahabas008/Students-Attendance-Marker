@@ -34,8 +34,8 @@ class _ProfileteacherState extends State<Accountpageteacher> {
         lastname = value['Last Name'];
         email = value['E-Mail'];
       });
-      data1.collectionreferenceprofile
-          .doc(data1.currentUser)
+      data1.collectionreferenceuser
+          .doc(FirebaseAuth.instance.currentUser!.email)
           .get()
           .then((value) {
         setState(() {

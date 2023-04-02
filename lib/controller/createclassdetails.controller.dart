@@ -24,7 +24,7 @@ void registerclass(String teachername, String classname , String subjectname) as
       "Subject Name" : subjectname,
       
     });
-       await FirebaseFirestore.instance.collection('User').doc(currentuser).collection('Teacher-Class').add({
+       await FirebaseFirestore.instance.collection('User').doc(FirebaseAuth.instance.currentUser!.email).collection('Subject').doc(subjectname).set({
       "Teacher Name" : teachername,
       "Class Name" : classname,
       "Subject Name" : subjectname,

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       scaffoldBackgroundColor:  const Color.fromARGB(255, 234, 234, 234),),
       initialRoute: 'splashscreen',
       routes: {
-        'splashscreen': (context) =>  TeacherMenupage(teachername: '', classname: '', subjectname: '',)
+        'splashscreen': (context) =>  const Loginpage()
       },
     );
   }

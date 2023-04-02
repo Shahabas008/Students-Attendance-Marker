@@ -112,7 +112,8 @@ class TeacherMenupage extends StatelessWidget {
                               backgroundColor: Colors.white,
                               minimumSize: const Size(120, 100)),
                           onPressed: () {
-                            Get.to(() =>  Internalmarkteacher());
+                            Get.to(() =>  Internalmarkteacher(),arguments:{ 
+                              "subjectname" : subjectname});
                           },
                           child: Column(
                             children: [
@@ -138,7 +139,10 @@ class TeacherMenupage extends StatelessWidget {
                               backgroundColor: Colors.white,
                               minimumSize: const Size(120, 100)),
                           onPressed: () {
-                            Get.to(() =>  Semestermarkteacher());
+                            Get.to(() =>  Semestermarkteacher(),
+                            arguments: {
+                              "subject" : subjectname
+                            });
                           },
                           child: Column(
                             children: [
@@ -172,7 +176,10 @@ class TeacherMenupage extends StatelessWidget {
                               backgroundColor: Colors.white,
                               minimumSize: const Size(120, 100)),
                           onPressed: () {
-                            Get.to(() =>  Notesteacher());
+                            Get.to(() =>  Notesteacher(),
+                            arguments: {
+                              "subjectname" : subjectname
+                            });
                           },
                           child: Column(
                             children: [
@@ -198,7 +205,10 @@ class TeacherMenupage extends StatelessWidget {
                               backgroundColor: Colors.white,
                               minimumSize: const Size(120, 100)),
                           onPressed: () {
-                            Get.to(() =>  Notificationteacherpage());
+                            Get.to(() =>  Notificationteacherpage(),
+                            arguments: {
+                              "subjectname" : subjectname
+                            });
                           },
                           child: Column(
                             children: [

@@ -234,7 +234,10 @@ class StudentMenupage extends StatelessWidget {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Assignmentstudents());
+                          Get.to(() => Assignmentstudents(),
+                          arguments: {
+                            'subjectname' : subjectname
+                          });
                         },
                         child: Column(
                           children: [
