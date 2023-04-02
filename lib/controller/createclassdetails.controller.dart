@@ -8,12 +8,8 @@ class Createclassdetailscontroller extends GetxController {
   ///Textformfield variable declaration
   final teachername = TextEditingController();
   final classname = TextEditingController();
-  final subjectname = TextEditingController();
+  final subjectname = TextEditingController(text: "default");
   final formkey = GlobalKey<FormState>();
-  final currentuser = FirebaseAuth.instance.currentUser!.email;
-  late String teachernames = teachername.text;
-  late String subname = subjectname.text;
-
  //uploading the details of the class for students
   void registerclass(
       String teachername, String classname, String subjectname) async {
@@ -27,7 +23,7 @@ class Createclassdetailscontroller extends GetxController {
         "Class Name": classname,
         "Subject Name": subjectname,
       });
-      //uploadint the class details for teachers
+      //uploading the class details for teachers
       await FirebaseFirestore.instance
           .collection('User')
           .doc(FirebaseAuth.instance.currentUser!.email)
