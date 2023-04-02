@@ -1,5 +1,6 @@
 import 'package:collegeproject/controller/createclassdetails.controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class Createclassdetails extends StatelessWidget {
@@ -30,6 +31,10 @@ class Createclassdetails extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(0),
                   child: TextFormField(
+                     inputFormatters: [
+                      LengthLimitingTextInputFormatter(10)
+                    ],
+                    textCapitalization: TextCapitalization.words,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'The field is required';
@@ -50,6 +55,7 @@ class Createclassdetails extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(0),
                   child: TextFormField(
+                    textCapitalization: TextCapitalization.characters,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'The field is required';
@@ -70,6 +76,10 @@ class Createclassdetails extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(0),
                   child: TextFormField(
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(15)
+                    ],
+                    textCapitalization: TextCapitalization.characters,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'The field is required';

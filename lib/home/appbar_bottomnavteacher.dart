@@ -52,7 +52,7 @@ class _HomepagelayoutState extends State<Homepagelayout> {
     const Accountpageteacher(),
   ];
   final studentPages = [
-    const Classlistviewstudents(),
+    Classlistviewstudents(),
     HomeNotificationstudentpage(),
     const Accountpagestudents(),
   ];

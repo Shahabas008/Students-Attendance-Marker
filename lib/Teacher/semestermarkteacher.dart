@@ -66,22 +66,13 @@ class Semestermarkteacher extends StatelessWidget {
             child: const Icon(Icons.add),
             onPressed: () {
               data.selectdocument();
-              semesterregisterpdf();
+              data.semesterregisterpdf();
             }),
       ),
     );
   }
 
-  //uploading the semester mark pdf download url to the firestore database
-  void semesterregisterpdf() async {
-    await FirebaseFirestore.instance
-        .collection("User")
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection("Subject")
-        .doc(subname)
-        .collection('Semester-Mark')
-        .add({"PDF download url": data.pdfurl, "PDF name": data.filename});
-  }
+
 }
 
 // class View extends StatefulWidget {

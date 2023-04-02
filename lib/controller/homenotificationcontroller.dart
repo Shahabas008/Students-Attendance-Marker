@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomeNotificationcontroller extends GetxController{
 
@@ -16,14 +17,22 @@ class HomeNotificationcontroller extends GetxController{
               scrollable: true,
               
               insetPadding: const EdgeInsets.symmetric( vertical: 200,horizontal: 15),
-              actions: [
+              actions: [ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(255, 161, 46, 46)),
+                    onPressed: () {
+                      navigator!.pop();
+                    },
+                    child: const Text('Back')),
                ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 153, 153, 153)
                 ),
                 onPressed: () {
                  notificationregister();
-                 
+                 teachername.clear();
+                 notification.clear();
                }, child: const Text('Done'))
               ],
               elevation: 15,
@@ -36,6 +45,7 @@ class HomeNotificationcontroller extends GetxController{
                 child: Column(
                   children: [
                     TextFormField(
+                      textCapitalization: TextCapitalization.words,
                       controller: teachername,
                       validator: ((value) {
                         if (value!.isEmpty) {
@@ -63,7 +73,7 @@ class HomeNotificationcontroller extends GetxController{
                           return null;
                         }
                       }),
-                    
+                      textCapitalization: TextCapitalization.words,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.person),
                         border: OutlineInputBorder(),
@@ -79,12 +89,11 @@ class HomeNotificationcontroller extends GetxController{
   }
   //uploading the notification download url to the firestore database 
   void notificationregister() async{
-    var now = DateTime.now();
-    var month = now.month.toString().padLeft(2, '0');
-    var day = now.day.toString().padLeft(2, '0');
-    var time = '${now.hour}:${now.minute}  ${now.year}-$month-$day ';
+    String date = DateFormat("MMM, EEE, yyyy").format(DateTime.now());
+    String times = DateFormat("hh:mm a").format(DateTime.now());
+    var time = '$times  $date';
     if(formkey.currentState!.validate()){
-          await FirebaseFirestore.instance.collection('College Notification').doc().set({
+          await FirebaseFirestore.instance.collection('Teacher').doc("Home-Notification").collection('i').add({
     "Notification" : notification.text,
     "Teacher Name" : teachername.text,
     "Time" : time

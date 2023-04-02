@@ -1,4 +1,5 @@
 import 'package:collegeproject/controller/login_controller.dart';
+import 'package:collegeproject/controller/sign_up_controller.dart';
 import 'package:collegeproject/create_an_account/reset_password.dart';
 import 'package:collegeproject/create_an_account/signup.dart';
 import 'package:collegeproject/home/appbar_bottomnavteacher.dart';
@@ -15,7 +16,12 @@ class Loginpage extends StatefulWidget {
 
 class _LoginpageState extends State<Loginpage> {
   final controller = Get.put(LoginController());
-
+  final data = Get.put(SignUpController());
+  void _toggle() {
+    setState(() {
+      data.obscureText = !data.obscureText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,11 +82,17 @@ class _LoginpageState extends State<Loginpage> {
                                 }
                                 return null;
                               },
-                              obscureText: true,
+                              obscureText: data.obscureText,
                               controller: controller.password,
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(Icons.fingerprint),
-                                border: OutlineInputBorder(),
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  onPressed: _toggle,
+                                  icon: data.obscureText
+                                      ? const Icon(Icons.visibility)
+                                      : const Icon(Icons.visibility_off),
+                                ),
+                                prefixIcon: const Icon(Icons.fingerprint),
+                                border: const OutlineInputBorder(),
                                 labelText: 'Password',
                               ),
                             ),

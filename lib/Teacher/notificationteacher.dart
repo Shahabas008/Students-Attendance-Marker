@@ -4,10 +4,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Notificationteacherpage extends StatelessWidget {
-  Notificationteacherpage({super.key});
+class Notificationteacherpage extends StatefulWidget {
+ const  Notificationteacherpage({super.key});
+
+  @override
+  State<Notificationteacherpage> createState() => _NotificationteacherpageState();
+}
+
+class _NotificationteacherpageState extends State<Notificationteacherpage> {
   final data = Get.put(Notificationcontroller());
+
+
   final subname = Get.arguments['subjectname'];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -66,7 +75,10 @@ class Notificationteacherpage extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(x['Notification']),
+                                  child: Text(x['Notification'],
+                                  style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),),
                                 ),
                               ],
                             ));
@@ -84,73 +96,9 @@ class Notificationteacherpage extends StatelessWidget {
             backgroundColor: const Color.fromARGB(255, 161, 46, 46),
             child: const Icon(Icons.add),
             onPressed: () {
-              addnotification(context);
+              data.addnotification(context);
             }),
       ),
     );
-  }
-
-  //uploading the notification download url to the firestore database
-  void notificationregister() async {
-    var now = DateTime.now();
-    var month = now.month.toString().padLeft(2, '0');
-    var day = now.day.toString().padLeft(2, '0');
-    var time = '${now.hour}:${now.minute}  ${now.year}-$month-$day ';
-    if (data.formkey.currentState!.validate()) {
-      await FirebaseFirestore.instance
-          .collection('User')
-          .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection("Subject").doc(subname).collection("Notification")
-          .add({"Notification": data.notification.text, "Time": time});
-      // await FirebaseFirestore.instance
-      //     .collection('User-Notification')
-      //     .doc(currentuser)
-      //     .collection('My-notification')
-      //     .add({"Notification": data.notification.text, "Time": time});
-    }
-    navigator!.pop();
-  }
-
-  //the notification popup doalog box
-  void addnotification(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            actions: [
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          const Color.fromARGB(255, 153, 153, 153)),
-                  onPressed: () {
-                    notificationregister();
-                  },
-                  child: const Text('Done'))
-            ],
-            elevation: 15,
-            title: const Text(
-              'Notification',
-              style: TextStyle(color: Color.fromARGB(255, 153, 153, 153)),
-            ),
-            content: Form(
-              key: data.formkey,
-              child: TextFormField(
-                controller: data.notification,
-                validator: ((value) {
-                  if (value!.isEmpty) {
-                    return 'The field is required';
-                  } else {
-                    return null;
-                  }
-                }),
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter Message',
-                ),
-              ),
-            ),
-          );
-        });
   }
 }

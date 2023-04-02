@@ -49,6 +49,7 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                       height: 20,
                     ),
                     TextFormField(
+                      textCapitalization: TextCapitalization.words,
                       validator: ((value) {
                         if (value!.isEmpty) {
                           return 'The field is required';
@@ -69,6 +70,7 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                       height: 20,
                     ),
                     TextFormField(
+                      textCapitalization: TextCapitalization.words,
                       validator: ((value) {
                         if (value!.isEmpty) {
                           return 'The field is required';

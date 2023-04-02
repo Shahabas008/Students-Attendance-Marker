@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 class Notificationstudentpage extends StatelessWidget {
    Notificationstudentpage({super.key});
   final data = Get.put(Notificationcontroller());
+  final subname = Get.arguments["subname"];
   @override
   Widget build(BuildContext context) {
    
@@ -17,7 +18,7 @@ class Notificationstudentpage extends StatelessWidget {
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('Notification')
+              .collection('Teacher').doc('Notification').collection(subname)
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {

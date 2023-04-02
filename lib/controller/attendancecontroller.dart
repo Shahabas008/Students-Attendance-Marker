@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/controller/createclassdetails.controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class Countercontroller extends GetxController {
   final studentname = TextEditingController();
   final rollnumber = TextEditingController();
   late FocusNode myFocusNode;
+  String subname = '';
   @override
   void onInit() {
     super.onInit();
@@ -118,8 +120,21 @@ class Countercontroller extends GetxController {
 
   Future attendancerecoder() async {
     if (formkey.currentState!.validate()) {
+      //uploading the student list to the teacher
       await FirebaseFirestore.instance
-          .collection('Attendance Recorder')
+          .collection('User')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection("Student-List")
+          .doc(subname)
+          .collection(studentname.text)
+          .add({
+        'student Name': studentname.text,
+        "Roll Number": rollnumber.text,
+      });
+      //uploading the student list to the students
+      await FirebaseFirestore.instance
+          .collection('Students')
+          .doc('Student-List').collection(subname)
           .doc(studentname.text)
           .set({
         'student Name': studentname.text,

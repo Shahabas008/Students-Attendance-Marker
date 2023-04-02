@@ -5,10 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-class Internalmarkteacher extends StatelessWidget {
-   Internalmarkteacher({super.key});
+class Internalmarkteacher extends StatefulWidget {
+  const  Internalmarkteacher({super.key});
+
+  @override
+  State<Internalmarkteacher> createState() => _InternalmarkteacherState();
+}
+
+class _InternalmarkteacherState extends State<Internalmarkteacher> {
   final data = Get.put(Markcontroller());
   final subname = Get.arguments['subjectname'];
+
   @override
   Widget build(BuildContext context) {
    
@@ -64,18 +71,13 @@ class Internalmarkteacher extends StatelessWidget {
             child: const Icon(Icons.add),
             onPressed: () {
               data.selectdocument();
-              internalregisterpdf();
+              data.internalregisterpdf();
             }),
       ),
     );
   }
-    //uploading the intermal mark pdf download url to the firestore database
-  void internalregisterpdf() async {
-    await FirebaseFirestore.instance
-        .collection('User')
-        .doc(FirebaseAuth.instance.currentUser!.email).collection("Subject").doc(subname).collection("Internal-mark")
-        .add({"PDF download url": data.pdfurl, "PDF name": data.filename});
-  }
+
+   
 }
 
 // class View extends StatefulWidget {

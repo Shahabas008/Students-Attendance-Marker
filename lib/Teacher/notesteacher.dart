@@ -71,22 +71,13 @@ class Notesteacher extends StatelessWidget {
             child: const Icon(Icons.add),
             onPressed: () {
               data.selectdocument();
-              notesregisterpdf();
+              data.notesregisterpdf();
             }),
       ),
     );
   }
 
-  //uploading the note pdf download url to the firestore database
-  void notesregisterpdf() async {
-    await FirebaseFirestore.instance
-        .collection('User')
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection("Subject")
-        .doc(subname)
-        .collection("Notes")
-        .add({"PDF download url": data.pdfurl, "PDF name": data.filename});
-  }
+
 }
 
 // class View extends StatefulWidget {

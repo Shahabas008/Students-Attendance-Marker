@@ -48,7 +48,8 @@ class Assignmentstudents extends StatelessWidget {
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
                         return Card(
-                            elevation: 5, child: Text(x['PDF name']));
+                            elevation: 5, 
+                            child: Text(x['PDF name']));
                       }),
                 );
               }
@@ -64,22 +65,13 @@ class Assignmentstudents extends StatelessWidget {
             child: const Icon(Icons.add),
             onPressed: () {
               data.selectdocument();
-              assignmentsregister();
+              data.assignmentsregister();
             }),
       ),
     );
   }
 
-  //uploading the assignments download url to the firestore database
-  void assignmentsregister() async {
-    await FirebaseFirestore.instance
-        .collection('User')
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection("Subject")
-        .doc(subname)
-        .collection("Assignment")
-        .add({"PDF download url": data.pdfurl, "PDF name": data.filename});
-  }
+ 
 }
 
 // class View extends StatelessWidget {

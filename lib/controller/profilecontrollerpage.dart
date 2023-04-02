@@ -25,6 +25,7 @@ class Profilepagecontroller extends GetxController {
       _image = File(pickedFile.path);
       uploadFile();
     } else {
+      // ignore: avoid_print
       print('No image selected.');
     }
   }
@@ -45,6 +46,7 @@ class Profilepagecontroller extends GetxController {
           .set({"Profile-Picture": downloadUrls},
           SetOptions(merge: true));
     } on FirebaseException catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }
