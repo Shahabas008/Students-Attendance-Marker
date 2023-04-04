@@ -2,7 +2,6 @@ import 'package:collegeproject/create_an_account/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
@@ -10,10 +9,8 @@ class LoginController extends GetxController {
   /// TextField Controllers to get data from TextFields
   final email = TextEditingController();
   final password = TextEditingController();
+  GlobalKey<FormState> formkey = GlobalKey();
   final currentuser = FirebaseAuth.instance.currentUser;
-final  formkey = GlobalKey<FormState>();
-
-  
 
   /// Authentication of the user(whether the user is signed in or not) and validation
   final _auth = FirebaseAuth.instance;

@@ -1,12 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Students/assignmentsstudents.dart';
 import 'package:collegeproject/Students/attendancestudents.dart';
 import 'package:collegeproject/Students/internalmarkstudents.dart';
 import 'package:collegeproject/Students/notesstudents.dart';
 import 'package:collegeproject/Students/notificationstudents.dart';
 import 'package:collegeproject/Students/semesterstudent.dart';
+import 'package:collegeproject/Teacher/viewstudents.dart';
 import 'package:collegeproject/controller/login_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -281,7 +280,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size(350, 50)),
                     onPressed: () {
-                      // Get.to(() => const Studentsviewteacher());
+                      Get.to(() => const Studentsviewteacher());
                     },
                     child: const Text("Students List ")),
                           ],

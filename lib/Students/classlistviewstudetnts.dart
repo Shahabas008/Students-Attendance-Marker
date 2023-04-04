@@ -13,9 +13,7 @@ class Classlistviewstudents extends StatelessWidget {
       stream: FirebaseFirestore.instance
           .collection('Teacher')
           .doc("Classes")
-          .collection(data.subjectname.value.text == ""
-              ? 'default'
-              : data.subjectname.value.text)
+          .collection("Classes")
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasData) {

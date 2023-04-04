@@ -8,7 +8,7 @@ class Createclassdetailscontroller extends GetxController {
   ///Textformfield variable declaration
   final teachername = TextEditingController();
   final classname = TextEditingController();
-  final subjectname = TextEditingController(text: "default");
+  final subjectname = TextEditingController();
   final formkey = GlobalKey<FormState>();
  //uploading the details of the class for students
   void registerclass(
@@ -17,8 +17,9 @@ class Createclassdetailscontroller extends GetxController {
       await FirebaseFirestore.instance
           .collection('Teacher')
           .doc("Classes")
-          .collection(subjectname)
-          .add({
+          .collection("Classes")
+          .doc(subjectname)
+          .set({
         "Teacher Name": teachername,
         "Class Name": classname,
         "Subject Name": subjectname,

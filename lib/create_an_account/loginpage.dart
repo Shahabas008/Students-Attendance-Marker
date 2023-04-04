@@ -15,8 +15,14 @@ class Loginpage extends StatefulWidget {
 }
 
 class _LoginpageState extends State<Loginpage> {
+  final formkey = GlobalKey<FormState>();
   final controller = Get.put(LoginController());
   final data = Get.put(SignUpController());
+  @override
+  void initState() {
+    super.initState();
+    controller.formkey = formkey;
+  }
   void _toggle() {
     setState(() {
       data.obscureText = !data.obscureText;
@@ -39,7 +45,7 @@ class _LoginpageState extends State<Loginpage> {
                 return const Homepagelayout();
               } else {
                 return Form(
-                  key: controller.formkey,
+                  key: formkey,
                   child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: ListView(

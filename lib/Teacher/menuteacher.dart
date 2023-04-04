@@ -1,10 +1,11 @@
 import 'package:collegeproject/Teacher/assignmentteacher.dart';
-import 'package:collegeproject/Teacher/attendanceteacher.dart';
+import 'package:collegeproject/Teacher/attendancecalendarteacher.dart';
 import 'package:collegeproject/Teacher/internalmarkteacher.dart';
 import 'package:collegeproject/Teacher/notesteacher.dart';
 import 'package:collegeproject/Teacher/notificationteacher.dart';
 import 'package:collegeproject/Teacher/semestermarkteacher.dart';
 import 'package:collegeproject/Teacher/viewstudents.dart';
+import 'package:collegeproject/controller/addstudentscontroller.dart';
 import 'package:collegeproject/controller/attendancecontroller.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/markcontroller.dart';
@@ -30,12 +31,14 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
   final data1 = Get.put(Markcontroller());
   final data2 = Get.put(Notificationcontroller());
   final data3 = Get.put(Countercontroller());
+  final data4 = Get.put(Attendancecontroller());
   @override
   void initState() {
     super.initState();
     data1.subname1 = widget.subjectname ; 
     data2.subname = widget.subjectname;
     data3.subname = widget.subjectname;
+    data4.subname = widget.subjectname;
   }
   final controller = Get.put(LoginController());
   final data = Get.put(Countercontroller());
@@ -105,7 +108,10 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => const AttendanceTeacher());
+                          Get.to(() => const AttendanceTeacher(),
+                          arguments: {
+                            "Subjectname" : widget.subjectname,
+                          });
                         },
                         child: Column(
                           children: [
@@ -280,7 +286,10 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size(350, 50)),
                     onPressed: () {
-                      Get.to(() => const Studentsviewteacher());
+                      Get.to(() => const Studentsviewteacher(),
+                      arguments: {
+                        "Subjectname" : widget.subjectname
+                      });
                     },
                     child: const Text("Students List ")),
                 const SizedBox(

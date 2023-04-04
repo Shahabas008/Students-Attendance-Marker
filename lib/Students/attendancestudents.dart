@@ -1,4 +1,4 @@
-import 'package:collegeproject/controller/attendancecontroller.dart';
+import 'package:collegeproject/controller/addstudentscontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
