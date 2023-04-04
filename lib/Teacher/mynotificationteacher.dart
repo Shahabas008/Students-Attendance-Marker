@@ -7,7 +7,6 @@ class Mynotificationteacher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentuser = FirebaseAuth.instance.currentUser!.email;
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
@@ -15,8 +14,8 @@ class Mynotificationteacher extends StatelessWidget {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('User-Notification')
-            .doc(currentuser)
+            .collection('Teacher')
+            .doc('Notification')
             .collection('My-notification')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

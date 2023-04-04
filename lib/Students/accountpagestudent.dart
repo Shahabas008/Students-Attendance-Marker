@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Students/myclassesstudents.dart';
 import 'package:collegeproject/Teacher/profilepageteacher.dart';
+import 'package:collegeproject/Teacher/verifyemail.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/profilecontrollerpage.dart';
 import 'package:collegeproject/controller/sign_up_controller.dart';
@@ -19,7 +20,7 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
   final data = Get.put(LoginController());
   final data1 = Get.put(Profilepagecontroller());
   final data2 = Get.put(SignUpController());
-   String firstname = '';
+  String firstname = '';
   String lastname = '';
   String email = '';
   String profileurl = '';
@@ -34,7 +35,8 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
         lastname = value['Last Name'];
         email = value['E-Mail'];
       });
-     FirebaseFirestore.instance.collection('User')
+      FirebaseFirestore.instance
+          .collection('User')
           .doc(data1.currentUser)
           .get()
           .then((value) {
@@ -43,14 +45,15 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
         });
       });
     });
-    data2.checkEmailVerification();
+    // data2.checkEmailVerification();
   }
 
   @override
   Widget build(BuildContext context) {
+    bool check = false;
     if (user.emailVerified) {
       setState(() {
-        data2.isEmailVerified = true;
+        check = true;
       });
     }
     return SafeArea(
@@ -128,34 +131,32 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                     child: Container(
                       color: Colors.white,
                       child: ListTile(
-                          onTap: () {
-                            if (!data2.isEmailVerified) {
-                             data2.sendverificationemail();
-                            } else {
-                              Get.showSnackbar(const GetSnackBar(
-                                padding: EdgeInsets.all(15),
-                                messageText: Text(
-                                    "The verification E-Mail hasn't send."),
-                              ));
-                            }
-                          },
-                          leading: const Icon(
-                            Icons.email,
-                            color: Color.fromARGB(255, 161, 46, 46),
-                          ),
-                          title: const Text('             verify E-Mail',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )),
-                          trailing: data2.isEmailVerified
-                              ? const Icon(
-                                  Icons.check,
-                                  color: Colors.green,
-                                )
-                              : const Icon(
-                                  Icons.close,
-                                  color: Colors.red,
-                                )),
+                        onTap: () {
+                          Get.to(() => const EmailVerificationScreen());
+                          // if (!data2.isEmailVerified) {
+                          //  data2.sendverificationemail();
+                          // } else {
+
+                          // }
+                        },
+                        leading: const Icon(
+                          Icons.email,
+                          color: Color.fromARGB(255, 161, 46, 46),
+                        ),
+                        title: const Text('             verify E-Mail',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            )),
+                        trailing:check
+                            ? const Icon(
+                                Icons.check,
+                                color: Colors.green,
+                              )
+                            : const Icon(
+                                Icons.close,
+                                color: Colors.red,
+                              )
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -210,30 +211,28 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
       ),
     );
   }
+
   Widget buildprofilecover() {
     return GestureDetector(
       onTap: () {
         data1.showPicker(context);
       },
       child: Container(
-       decoration: BoxDecoration(
-         color: const Color.fromARGB(255, 234, 234, 234),
-          borderRadius: BorderRadius.circular(10)
-        
-       ),
+        decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 234, 234, 234),
+            borderRadius: BorderRadius.circular(10)),
         height: 150,
         width: 140,
-       
         child: SizedBox(
-          height: 130,
-          width: 200,
-          child:profileurl == ''
-              ? Image.asset('assets/user.jpg')
-              : Image.network(profileurl)
-        ),
+            height: 130,
+            width: 200,
+            child: profileurl == ''
+                ? Image.asset('assets/user.jpg')
+                : Image.network(profileurl)),
       ),
     );
   }
+
   Widget buildusername() {
     return Text(
       '$firstname $lastname',
