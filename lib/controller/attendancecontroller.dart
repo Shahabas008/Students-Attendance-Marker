@@ -12,19 +12,6 @@ class Attendancecontroller extends GetxController {
     dates.add(date);
   }
 
-  void setAttendanceList(List<QueryDocumentSnapshot> list) {
-    for (int i = 0; i < list.length; i++) {
-      attendance.addAll({
-        list[i].get('student Name'): {
-          "absent": false,
-          "present": false,
-          "late": false
-        }
-      });
-    }
-    attendance.refresh();
-  }
-
   Future submitattendance() async {
     //stroing the attendance recorder to the current user
     await FirebaseFirestore.instance
@@ -35,14 +22,45 @@ class Attendancecontroller extends GetxController {
         .collection("Attendance")
         .doc(date)
         .set({"attendance": attendance});
-        //uploading to the teacher collection
-        await FirebaseFirestore.instance
+    //uploading to the teacher collection
+    await FirebaseFirestore.instance
         .collection("Teacher")
         .doc(subname)
         .collection("Attendance")
         .doc(date)
         .set({"attendance": attendance});
-        Get.back();
+    Get.back();
   }
-  
+
+  Future<void> fetchAttendanceDates() async {
+    QuerySnapshot attendanceSnapshot = await FirebaseFirestore.instance
+        .collection("User")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection("Subject")
+        .doc(subname)
+        .collection("Attendance")
+        .get();
+
+    dates.value = attendanceSnapshot.docs.map((e) => e.id).toList();
+    dates.refresh();
+  }
+
+  Future<void> fetchAttendance() async {
+    try {
+      DocumentSnapshot attendanceDoc = await FirebaseFirestore.instance
+          .collection("User")
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection("Subject")
+          .doc(subname)
+          .collection("Attendance")
+          .doc(date)
+          .get();
+
+      attendance.value = attendanceDoc.get("attendance");
+      attendance.refresh();
+    } catch (e) {
+      attendance.value = {};
+      attendance.refresh();
+    }
+  }
 }

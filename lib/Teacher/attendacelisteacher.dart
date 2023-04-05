@@ -14,10 +14,12 @@ class Attendancelistteacher extends StatefulWidget {
 class AattendancelistteacherState extends State<Attendancelistteacher> {
   final controller = Get.put(Attendancecontroller());
   final selectedDate = Get.arguments["selectedDate"];
+
   @override
   void initState() {
     super.initState();
     controller.date = selectedDate;
+    controller.fetchAttendance();
   }
 
   @override
@@ -49,13 +51,11 @@ class AattendancelistteacherState extends State<Attendancelistteacher> {
                 'Present',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
-              
             ],
           ),
           const Divider(
             height: 45,
             color: Colors.black,
-            
           ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
@@ -68,9 +68,6 @@ class AattendancelistteacherState extends State<Attendancelistteacher> {
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasData) {
-                  controller.setAttendanceList(snapshot.data!.docs);
-                }
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     DocumentSnapshot x = snapshot.data!.docs[index];
@@ -82,35 +79,28 @@ class AattendancelistteacherState extends State<Attendancelistteacher> {
                             x['student Name'],
                             style: const TextStyle(fontSize: 18),
                           ),
-                          Checkbox(
-                            value: controller.attendance[x['student Name']]
-                                ["absent"],
-                            onChanged: (bool? value) {
-                              controller.attendance[x['student Name']]
-                                  ["absent"] = value;
-                              controller.attendance.refresh();
+                          Radio(
+                            value: "absent",
+                            groupValue:
+                                controller.attendance[x['student Name']],
+                            onChanged: (value) {
+                              controller.attendance[x['student Name']] = value;
                             },
                           ),
-                          Checkbox(
-                            value: index <= controller.attendance.length
-                                ? controller.attendance[x['student Name']]
-                                    ["present"]
-                                : 0,
-                            onChanged: (bool? value) {
-                              controller.attendance[x['student Name']]
-                                  ["present"] = value;
-                              controller.attendance.refresh();
+                          Radio(
+                            value: "present",
+                            groupValue:
+                                controller.attendance[x['student Name']],
+                            onChanged: (value) {
+                              controller.attendance[x['student Name']] = value;
                             },
                           ),
-                          Checkbox(
-                            value: index <= controller.attendance.length
-                                ? controller.attendance[x['student Name']]
-                                    ["late"]
-                                : 0,
-                            onChanged: (bool? value) {
-                              controller.attendance[x['student Name']]["late"] =
-                                  value;
-                              controller.attendance.refresh();
+                          Radio(
+                            value: "late",
+                            groupValue:
+                                controller.attendance[x['student Name']],
+                            onChanged: (value) {
+                              controller.attendance[x['student Name']] = value;
                             },
                           ),
                         ],
