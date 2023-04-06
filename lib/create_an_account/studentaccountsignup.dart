@@ -164,6 +164,10 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                                 users);
                             SignUpController.instance
                                 .createuser(data.email.text, data.password.text);
+                                data.email.clear();
+                                data.firstname.clear();
+                                data.lastname.clear();
+                                data.password.clear();
                           },
                           child: const Text('SIGN UP'),
                         ),

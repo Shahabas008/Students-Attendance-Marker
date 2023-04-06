@@ -165,6 +165,10 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                                 data.firstname.text,
                                 data.lastname.text,
                                 users);
+                                data.email.clear();
+                                data.firstname.clear();
+                                data.lastname.clear();
+                                data.password.clear();
                           },
                           child: const Text('Sign Up'),
                         ),

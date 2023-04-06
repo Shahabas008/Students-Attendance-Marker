@@ -3,30 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EmailVerificationScreen extends StatefulWidget {
-  const EmailVerificationScreen({Key? key}) : super(key: key);
+class Verifyemailpage extends StatefulWidget {
+  const Verifyemailpage({super.key});
 
   @override
-  State<EmailVerificationScreen> createState() =>
-      _EmailVerificationScreenState();
+  State<Verifyemailpage> createState() => VerifyemailpageState();
 }
 
-class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
-  bool isEmailVerified = false;
+class VerifyemailpageState extends State<Verifyemailpage> {
   final auth = FirebaseAuth.instance;
+  final email = Get.arguments["email"];
   User? user;
-
   Timer? timer;
-  @override
-  void initState() {
-    user = auth.currentUser;
-    FirebaseAuth.instance.currentUser!.sendEmailVerification();
-    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      checkEmailVerified();
-    });
-    super.initState();
-  }
-
   Future<void> checkEmailVerified() async {
     user = auth.currentUser;
     await user!.reload();
@@ -36,12 +24,15 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     }
   }
 
-  // if (isEmailVerified) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text("Email Successfully Verified")));
-
-  //   timer?.cancel();
-  // }
+  @override
+  void initState() {
+    user = auth.currentUser;
+    user!.sendEmailVerification();
+    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      checkEmailVerified();
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -53,58 +44,38 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 35),
-              const SizedBox(height: 30),
-              const Center(
-                child: Text(
-                  'Check your \n Email',
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Center(
-                  child: Text(
-                    'We have sent you a Email on  ${FirebaseAuth.instance.currentUser?.email}',
-                    textAlign: TextAlign.center,
+        backgroundColor: const Color.fromARGB(255, 216, 211, 211),
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 300, 8, 50),
+          child: Center(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  SizedBox(
+                    child: Text(
+                      '                Verification Mail \n               has been sent to  \n     $email !',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              isEmailVerified
-                  ? const Text("The email his verified")
-                  : const CircularProgressIndicator(),
-              const SizedBox(height: 8),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.0),
-                child: Center(
-                  child: Text(
-                    'Verifying email....',
-                    textAlign: TextAlign.center,
+                  const SizedBox(
+                    height: 120,
                   ),
-                ),
-              ),
-              const SizedBox(height: 57),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: ElevatedButton(
-                  child: const Text('Resend'),
-                  onPressed: () {
-                    try {
-                      FirebaseAuth.instance.currentUser
-                          ?.sendEmailVerification();
-                    } catch (e) {
-                      debugPrint('$e');
-                    }
-                  },
-                ),
-              ),
-            ],
+                  const SizedBox(
+                    child: Text(
+                      'Check the entered E-Mail if the Mail hasn\'t received',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  )
+                ]),
           ),
         ),
       ),

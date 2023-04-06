@@ -124,7 +124,10 @@ class _LoginpageState extends State<Loginpage> {
                                   LoginController.instance.signIn(
                                       controller.email.text.trim(),
                                       controller.password.text.trim());
+                                      controller.email.clear();
+                                      controller.password.clear();
                                 },
+                                
                               )),
                           const SizedBox(
                             height: 10,

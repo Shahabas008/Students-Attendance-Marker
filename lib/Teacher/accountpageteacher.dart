@@ -1,11 +1,10 @@
-import 'package:collegeproject/Teacher/mynotificationteacher.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Teacher/profilepageteacher.dart';
 import 'package:collegeproject/Teacher/verifyemail.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/profilecontrollerpage.dart';
 import 'package:collegeproject/controller/sign_up_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,14 +35,14 @@ class _ProfileteacherState extends State<Accountpageteacher> {
       setState(() {
         firstname = value['First Name'];
         lastname = value['Last Name'];
-        email = value['E-Mail'];
+        email = value["E-Mail"];
       });
-      data1.collectionreferenceuser
+      FirebaseFirestore.instance.collection("User")
           .doc(FirebaseAuth.instance.currentUser!.email)
           .get()
           .then((value) {
         setState(() {
-          data1.profileurl = value['Profile Picture'];
+          profileurl = value['Profile-Picture'];
         });
       });
     });
@@ -52,11 +51,14 @@ class _ProfileteacherState extends State<Accountpageteacher> {
   @override
   Widget build(BuildContext context) {
     bool checks = false ;
-    if (user.emailVerified) {
-      setState(() {
-      checks = true;      
-      });
+  setState(() {
+    user.reload();
+    if(user.emailVerified){
+      checks = true;
     }
+  });
+    
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -107,39 +109,16 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                       ),
                     ),
                   ),
-
-                  // Padding(
-                  //   padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
-                  //   child: Container(
-                  //     color: Colors.white,
-                  //     child: ListTile(
-                  //       onTap: () {
-                  //         Get.to(() => const Mynotificationteacher());
-                  //       },
-                  //       leading: const Icon(
-                  //         Icons.notifications,
-                  //         color: Color.fromARGB(255, 161, 46, 46),
-                  //       ),
-                  //       title: const Text('           My Notifications',
-                  //           style: TextStyle(
-                  //             fontWeight: FontWeight.bold,
-                  //           )),
-                  //       trailing: const Icon(Icons.arrow_forward),
-                  //     ),
-                  //   ),
-                  // ),
-                  Padding(
+                 Padding(
                     padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
                     child: Container(
                       color: Colors.white,
                       child: ListTile(
                           onTap: () {
-                            Get.to(() => const EmailVerificationScreen());
-                            // if (!data2.isEmailVerified) {
-                            //   data2.sendverificationemail();
-                            // } else {
-                             
-                            // }
+                            Get.to(() => const Verifyemailpage(),
+                            arguments: {
+                              "email" : email
+                            });
                           },
                           leading: const Icon(
                             Icons.email,
@@ -150,15 +129,14 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                                 fontWeight: FontWeight.bold,
                               )),
                           trailing: checks
-                          ? const Icon(
-                                Icons.check,
-                                color: Colors.green,
-                              )
-                            : const Icon(
-                                Icons.close,
-                                color: Colors.red,
-                              )
-                          ),
+                              ? const Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                )
+                              : const Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                )),
                     ),
                   ),
                   const SizedBox(

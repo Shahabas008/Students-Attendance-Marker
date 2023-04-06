@@ -98,9 +98,10 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(
-                            () => AttendanceStudents(
-                              classname: widget.classname,
-                            ),
+                            () => const AttendanceStudents(),
+                            arguments: {
+                              "subname": widget.subjectname
+                            }
                           );
                         },
                         child: Column(
@@ -128,9 +129,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(() => Internalmarkstudent(),
-                          arguments: {
-                            "subname" : widget.subjectname
-                          });
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -157,9 +156,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(() => Semestermarkstudent(),
-                          arguments: {
-                            "subname" : widget.subjectname
-                          });
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -194,9 +191,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(() => Notesstudent(),
-                          arguments: {
-                            "subname" : widget.subjectname
-                          });
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -223,9 +218,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(() => Notificationstudentpage(),
-                          arguments: {
-                            "subname" : widget.subjectname
-                          });
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -252,9 +245,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
                           Get.to(() => Assignmentstudents(),
-                          arguments: {
-                            'subjectname' : widget.subjectname
-                          });
+                              arguments: {'subjectname': widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -273,20 +264,23 @@ class _StudentMenupageState extends State<StudentMenupage> {
                                 color: Color.fromARGB(255, 153, 153, 153),
                               ),
                             ),
-                             const SizedBox(
+                          ],
+                        ))
+                  ],
+                ),
+                const SizedBox(
                   height: 150,
                 ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size(350, 50)),
                     onPressed: () {
-                      Get.to(() => const Studentsviewteacher());
+                      Get.to(() => const Studentsviewteacher(),
+                      arguments: {
+                        "Subjectname" : widget.subjectname
+                      });
                     },
                     child: const Text("Students List ")),
-                          ],
-                        ))
-                  ],
-                ),
               ],
             ),
           ))),

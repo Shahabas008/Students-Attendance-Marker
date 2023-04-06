@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/controller/profilecontrollerpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class _ProfilepageteacherState extends State<Profilepageteacher> {
   void initState() {
     super.initState();
     setState(() {
-      data1.collectionreferenceuser
+      FirebaseFirestore.instance.collection("User")
           .doc(FirebaseAuth.instance.currentUser!.email)
           .get()
           .then((value) {
