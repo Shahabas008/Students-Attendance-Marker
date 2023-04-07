@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collegeproject/Teacher/attendacelisteacher.dart';
 import 'package:collegeproject/controller/addstudentscontroller.dart';
 import 'package:collegeproject/controller/attendancecontroller.dart';
 import 'package:flutter/material.dart';

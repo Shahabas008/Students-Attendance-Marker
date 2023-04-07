@@ -49,7 +49,6 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
         });
       });
     });
-    // data2.checkEmailVerification();
   }
 
   @override

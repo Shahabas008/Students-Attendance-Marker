@@ -6,6 +6,7 @@ import 'package:collegeproject/Students/notificationstudents.dart';
 import 'package:collegeproject/Students/semesterstudent.dart';
 import 'package:collegeproject/Teacher/viewstudents.dart';
 import 'package:collegeproject/controller/login_controller.dart';
+import 'package:collegeproject/controller/markcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,6 +26,12 @@ class StudentMenupage extends StatefulWidget {
 
 class _StudentMenupageState extends State<StudentMenupage> {
   final controller = Get.put(LoginController());
+  final controller1 = Get.put(Markcontroller());
+  @override
+  void initState() {
+    super.initState();
+    controller1.subname = widget.subjectname;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +251,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(() => Assignmentstudents(),
+                          Get.to(() => const Assignmentstudents(),
                               arguments: {'subjectname': widget.subjectname});
                         },
                         child: Column(

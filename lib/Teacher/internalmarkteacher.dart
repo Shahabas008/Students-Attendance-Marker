@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collegeproject/Resources/pdfviewer.dart';
 import 'package:collegeproject/controller/markcontroller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class Internalmarkteacher extends StatefulWidget {
   const  Internalmarkteacher({super.key});
@@ -51,11 +51,18 @@ class _InternalmarkteacherState extends State<Internalmarkteacher> {
                           : snapshot.data!.docs.length,
                       itemBuilder: (context, i) {
                         DocumentSnapshot x = snapshot.data!.docs[i];
-                        return Card(
-                          
-                          child: GestureDetector(
-                            // onTap: () => const View(),
-                            child: Text(x['PDF name'])));
+                        return SizedBox(
+                          height: 50,
+                          child: Card(
+                              child: GestureDetector(
+                                  onTap: () => Get.to(() => const PDFViewer(),
+                                  arguments: {
+                                    "PDFURL" : x["PDF download url"]
+                                  }),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(x['PDF name'])))),
+                        );
                       }),
                 );
               }
@@ -70,8 +77,7 @@ class _InternalmarkteacherState extends State<Internalmarkteacher> {
             backgroundColor: const Color.fromARGB(255, 161, 46, 46),
             child: const Icon(Icons.add),
             onPressed: () {
-              data.selectdocument();
-              data.internalregisterpdf();
+              data.internalmark();
             }),
       ),
     );
@@ -80,28 +86,3 @@ class _InternalmarkteacherState extends State<Internalmarkteacher> {
    
 }
 
-// class View extends StatefulWidget {
-//   const View({super.key});
-
-//   @override
-//   State<View> createState() => _ViewState();
-// }
-
-// class _ViewState extends State<View> {
-//   final _pdfViewerController = PdfViewerController();
-
-//   final data = Get.put(Markcontroller());
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('pdf viewer'),
-//       ),
-//       body: SfPdfViewer.network(
-//         data.pdfurl,
-//         controller: _pdfViewerController,
-//       ),
-//     );
-//   }
-// }
