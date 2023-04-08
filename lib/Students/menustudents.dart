@@ -5,6 +5,7 @@ import 'package:collegeproject/Students/notesstudents.dart';
 import 'package:collegeproject/Students/notificationstudents.dart';
 import 'package:collegeproject/Students/semesterstudent.dart';
 import 'package:collegeproject/Teacher/viewstudents.dart';
+import 'package:collegeproject/controller/createclassdetails.controller.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/markcontroller.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +28,14 @@ class StudentMenupage extends StatefulWidget {
 class _StudentMenupageState extends State<StudentMenupage> {
   final controller = Get.put(LoginController());
   final controller1 = Get.put(Markcontroller());
+  final controller2 = Get.put(Createclassdetailscontroller());
   @override
   void initState() {
     super.initState();
     controller1.subname = widget.subjectname;
+    controller2.subname = widget.subjectname;
+    controller2.classes = widget.classname;
+    controller2.teacher = widget.teachername;
   }
 
   @override
@@ -41,7 +46,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
             actions: [
               IconButton(
                   onPressed: () {
-                    // addtomyclasses();
+                    controller2.addtomyclasses();
                   },
                   icon: const Icon(Icons.add))
             ],
@@ -294,29 +299,5 @@ class _StudentMenupageState extends State<StudentMenupage> {
     );
   }
 
-  // //adding the students class to my class page on account page
-  // void addtomyclasses() async {
-  //   final currentuser = FirebaseAuth.instance.currentUser!.email;
-  //   await FirebaseFirestore.instance
-  //       .collection('User-Student-classes')
-  //       .doc(currentuser)
-  //       .collection('My-classes')
-  //       .add({
-  //     "Teacher Name": widget.teachername,
-  //     "Class Name": widget.classname,
-  //     "Subject Name": widget.subjectname,
-  //   });
-  //   Get.showSnackbar(const GetSnackBar(
-  //     borderRadius: 8,
-  //     padding: EdgeInsets.all(20),
-  //     messageText: Text(
-  //       'Added to My classes',
-  //       style: TextStyle(
-  //         color: Color.fromARGB(255, 161, 46, 46),
-  //       ),
-  //     ),
-  //     duration: Duration(seconds: 3),
-  //     backgroundColor: Colors.white,
-  //   ));
-  // }
+  
 }
