@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collegeproject/Students/menustudents.dart';
+import 'package:collegeproject/Students/myclassdetail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,7 +63,7 @@ class MYclassstudents extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () {
                                   Get.to(
-                                    () => StudentMenupage(
+                                    () => Myclassdetail(
                                         teachername:
                                             documentSnapshot['Teacher Name'],
                                         classname:

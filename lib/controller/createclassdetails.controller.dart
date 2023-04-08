@@ -10,10 +10,10 @@ class Createclassdetailscontroller extends GetxController {
   final classname = TextEditingController();
   final subjectname = TextEditingController();
   final formkey = GlobalKey<FormState>();
-  String subname = "" ;
+  String subname = "";
   String teacher = '';
   String classes = '';
-    //uploading the details of the class for students
+  //uploading the details of the class for students
   void registerclass(
       String teachername, String classname, String subjectname) async {
     if (formkey.currentState!.validate()) {
@@ -41,7 +41,7 @@ class Createclassdetailscontroller extends GetxController {
       Get.offAll(() => const Homepagelayout());
     }
   }
-  
+
 //adding the students class to my class page on account page
   void addtomyclasses() async {
     await FirebaseFirestore.instance
@@ -52,7 +52,7 @@ class Createclassdetailscontroller extends GetxController {
         .set({
       "Teacher Name": teacher,
       "Class Name": classes,
-      "Subject Name":subname,
+      "Subject Name": subname,
     });
     Get.showSnackbar(const GetSnackBar(
       borderRadius: 8,
@@ -60,11 +60,11 @@ class Createclassdetailscontroller extends GetxController {
       messageText: Text(
         'Added to My classes',
         style: TextStyle(
-          color: Color.fromARGB(255, 161, 46, 46),
+          color: Colors.white,
         ),
       ),
       duration: Duration(seconds: 3),
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 161, 46, 46),
     ));
   }
 }
