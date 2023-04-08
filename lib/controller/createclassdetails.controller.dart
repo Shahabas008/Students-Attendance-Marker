@@ -67,4 +67,21 @@ class Createclassdetailscontroller extends GetxController {
       backgroundColor: Color.fromARGB(255, 161, 46, 46),
     ));
   }
+
+  //delete the classes of teachers
+  void deleteclass() {
+    FirebaseFirestore.instance
+        .collection('User')
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection('Subject')
+        .doc(subname)
+        .delete();
+     FirebaseFirestore.instance
+          .collection('Teacher')
+          .doc("Classes")
+          .collection("Classes")
+          .doc(subname)
+          .delete();
+          Get.back();
+  }
 }
