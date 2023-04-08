@@ -37,7 +37,8 @@ class _ProfileteacherState extends State<Accountpageteacher> {
         lastname = value['Last Name'];
         email = value["E-Mail"];
       });
-      FirebaseFirestore.instance.collection("User")
+      FirebaseFirestore.instance
+          .collection("User")
           .doc(FirebaseAuth.instance.currentUser!.email)
           .get()
           .then((value) {
@@ -50,14 +51,13 @@ class _ProfileteacherState extends State<Accountpageteacher> {
 
   @override
   Widget build(BuildContext context) {
-    bool checks = false ;
-  setState(() {
-    user.reload();
-    if(user.emailVerified){
-      checks = true;
-    }
-  });
-    
+    bool checks = false;
+    setState(() {
+      user.reload();
+      if (user.emailVerified) {
+        checks = true;
+      }
+    });
 
     return SafeArea(
       child: Scaffold(
@@ -109,16 +109,14 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                       ),
                     ),
                   ),
-                 Padding(
+                  Padding(
                     padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
                     child: Container(
                       color: Colors.white,
                       child: ListTile(
                           onTap: () {
                             Get.to(() => const Verifyemailpage(),
-                            arguments: {
-                              "email" : email
-                            });
+                                arguments: {"email": email});
                           },
                           leading: const Icon(
                             Icons.email,
