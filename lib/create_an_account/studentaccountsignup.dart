@@ -163,7 +163,7 @@ class _Studentaccpage1State extends State<Studentaccpage1> {
                                 data.lastname.text,
                                 users);
                             SignUpController.instance
-                                .createuser(data.email.text, data.password.text);
+                                .createuser(data.email.text, data.password.text , data.firstname.text);
                                 data.email.clear();
                                 data.firstname.clear();
                                 data.lastname.clear();

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Teacher/assignmentteacher.dart';
 import 'package:collegeproject/Teacher/attendancecalendarteacher.dart';
 import 'package:collegeproject/Teacher/internalmarkteacher.dart';
@@ -12,7 +11,6 @@ import 'package:collegeproject/controller/createclassdetails.controller.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/markcontroller.dart';
 import 'package:collegeproject/controller/notificationcontroller.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

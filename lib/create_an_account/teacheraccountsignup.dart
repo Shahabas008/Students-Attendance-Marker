@@ -159,7 +159,7 @@ class _Teacheraccpage1State extends State<Teacheraccpage1> {
                               minimumSize: const Size(350, 50)),
                           onPressed: () {
                             SignUpController.instance
-                                .createuser(data.email.text, data.password.text);
+                                .createuser(data.email.text, data.password.text , data.firstname.text);
                             SignUpController.instance.registeruserteacherandstudent(
                                 data.email.text,
                                 data.firstname.text,

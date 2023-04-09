@@ -65,6 +65,7 @@ class AattendancelistteacherState extends State<Attendancelistteacher> {
                   .collection("Subject")
                   .doc(controller.subname)
                   .collection("Student-List")
+                  .orderBy("Roll Number" , descending: false)
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {

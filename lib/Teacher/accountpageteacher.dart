@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collegeproject/Resources/my_flutter_app_icons.dart';
 import 'package:collegeproject/Teacher/profilepageteacher.dart';
+import 'package:collegeproject/Teacher/request.dart';
+import 'package:collegeproject/Teacher/requestdetails.dart';
 import 'package:collegeproject/Teacher/verifyemail.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/profilecontrollerpage.dart';
@@ -7,6 +10,7 @@ import 'package:collegeproject/controller/sign_up_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/request/request.dart';
 
 class Accountpageteacher extends StatefulWidget {
   const Accountpageteacher({super.key});
@@ -101,10 +105,34 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                           Icons.person,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('                 Profile',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: const Align(
+                          child:  Text('Profile',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward),
+                      ),
+                    ),
+                  ),
+                   Padding(
+                    padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
+                    child: Container(
+                      color: Colors.white,
+                      child:   ListTile(
+                        onTap:(){
+                           Get.to(() => const Requestpage());
+                        },
+                        leading:const Icon(
+                          MyFlutterApp.user_plus,
+                          color: Color.fromARGB(255, 161, 46, 46),
+                        ),
+                        title: const Align(
+                          child: Text('Request',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),
@@ -122,10 +150,12 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                             Icons.email,
                             color: Color.fromARGB(255, 161, 46, 46),
                           ),
-                          title: const Text('             verify E-Mail',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )),
+                          title: const Align(
+                            child:   Text('verify E-Mail',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
                           trailing: checks
                               ? const Icon(
                                   Icons.check,
@@ -149,10 +179,12 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                           Icons.settings,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: Text('                settings',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: Align(
+                          child: Text('settings',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: Icon(Icons.arrow_forward),
                       ),
                     ),
@@ -169,10 +201,12 @@ class _ProfileteacherState extends State<Accountpageteacher> {
                           Icons.logout,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('                 Logout',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: const Align(
+                          child:   Text('Logout',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),
