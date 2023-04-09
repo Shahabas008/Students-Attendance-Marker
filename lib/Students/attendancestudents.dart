@@ -1,5 +1,5 @@
-import 'package:collegeproject/controller/addstudentscontroller.dart';
-import 'package:collegeproject/controller/attendancecontroller.dart';
+import 'package:collegeproject/Students/attendanceliststudent.dart';
+import 'package:collegeproject/controller/attendance_students_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,15 +11,7 @@ class AttendanceStudents extends StatefulWidget {
 }
 
 class _AttendanceStudentsState extends State<AttendanceStudents> {
-  final data = Get.put(Countercontroller());
-  final controller = Get.put(Attendancecontroller());
-  final subname = Get.arguments["subname"];
-  @override
-  void initState() {
-    
-    super.initState();
-    
-  }
+  final controller = Get.put(AttendanceStudentsController());
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +20,22 @@ class _AttendanceStudentsState extends State<AttendanceStudents> {
         appBar: AppBar(
           title: const Text("Attendance Date"),
         ),
-        //evde attendanceliststudentsilott navigate cheyumbo Date ne argument akki kodukuka.
+        body: Obx(() {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: controller.attendanceSnapshot.value == null
+                ? []
+                : controller.attendanceSnapshot.value!.docs
+                    .map((element) => MaterialButton(
+                          child: Text(element.id),
+                          onPressed: () {
+                            Get.to(() => const Attendanceliststudent(),
+                                arguments: {"attendanceSnapshot": element});
+                          },
+                        ))
+                    .toList(),
+          );
+        }),
       ),
     );
   }

@@ -22,6 +22,16 @@ class Attendancecontroller extends GetxController {
         .collection("Attendance")
         .doc(date)
         .set({"attendance": attendance});
+
+    await FirebaseFirestore.instance
+        .collection("Teacher")
+        .doc("Classes")
+        .collection("Classes")
+        .doc(subname)
+        .collection("Attendance")
+        .doc(date)
+        .set({"attendance": attendance});
+
     //uploading to the teacher collection
     await FirebaseFirestore.instance
         .collection("Teacher")
@@ -29,6 +39,7 @@ class Attendancecontroller extends GetxController {
         .collection("Attendance")
         .doc(date)
         .set({"attendance": attendance});
+
     Get.back();
   }
 

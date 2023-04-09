@@ -1,26 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collegeproject/controller/attendancecontroller.dart';
+import 'package:collegeproject/controller/attendance_list_student_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Attendancelistteacher extends StatefulWidget {
-  const Attendancelistteacher({super.key});
+class Attendanceliststudent extends StatefulWidget {
+  const Attendanceliststudent({super.key});
 
   @override
-  State<Attendancelistteacher> createState() => AattendancelistteacherState();
+  State<Attendanceliststudent> createState() => AattendanceliststudentState();
 }
 
-class AattendancelistteacherState extends State<Attendancelistteacher> {
-  final controller = Get.put(Attendancecontroller());
-  final selectedDate = Get.arguments["selectedDate"];
-  final date = Get.arguments["Date"];
-
-  @override
-  void initState() {
-    super.initState();
-    controller.date = selectedDate;
-    controller.fetchAttendance();
-  }
+class AattendanceliststudentState extends State<Attendanceliststudent> {
+  final controller = Get.put(AttendanceListStudentController());
 
   @override
   Widget build(BuildContext context) {
@@ -58,61 +48,59 @@ class AattendancelistteacherState extends State<Attendancelistteacher> {
             color: Colors.black,
           ),
           Expanded(
-            child: StreamBuilder<DocumentSnapshot<Map<String,dynamic>>>(
-              stream: FirebaseFirestore.instance
-                  .collection('Teacher')
-                  .doc(controller.subname)
-                  .collection("Attendance")
-                  .doc(date)
-                  .snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<DocumentSnapshot<Map<String,dynamic>>> snapshot) {
-                return ListView.builder(
-                  itemBuilder: (context, index) {
-                     Map<String,dynamic> data = snapshot.data!.data() as Map<String,dynamic> ;
-                    return Obx(() {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            data['student Name'],
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                          Radio(
-                            value: "absent",
-                            groupValue:
-                                controller.attendance[data['student Name']],
-                            onChanged: (value) {
-                              controller.attendance[data['student Name']] = value;
-                            },
-                          ),
-                          Radio(
-                            value: "present",
-                            groupValue:
-                                controller.attendance[data['student Name']],
-                            onChanged: (value) {
-                              controller.attendance[data['student Name']] = value;
-                            },
-                          ),
-                          Radio(
-                            value: "late",
-                            groupValue:
-                                controller.attendance[data['student Name']],
-                            onChanged: (value) {
-                              controller.attendance[data['student Name']] = value;
-                            },
-                          ),
-                        ],
-                      );
-                    });
-                  },
-                  // itemCount:
-                      // snapshot.data == null ? 0 : data,
-                );
-              },
-            ),
-          ),
-          
+              child: ListView.builder(
+            itemCount: controller.attendanceSnapshot.get("attendance").length,
+            itemBuilder: (context, index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    controller.attendanceSnapshot
+                        .get("attendance")
+                        .entries
+                        .elementAt(index)
+                        .key,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                  Radio(
+                    value: "absent",
+                    groupValue: controller.attendanceSnapshot
+                        .get("attendance")
+                        .entries
+                        .elementAt(index)
+                        .value,
+                    onChanged: (value) {
+                      return;
+                    },
+                  ),
+                  Radio(
+                    value: "present",
+                    groupValue: controller.attendanceSnapshot
+                        .get("attendance")
+                        .entries
+                        .elementAt(index)
+                        .value,
+                    onChanged: (value) {
+                      return;
+                    },
+                  ),
+                  Radio(
+                    value: "late",
+                    groupValue: controller.attendanceSnapshot
+                        .get("attendance")
+                        .entries
+                        .elementAt(index)
+                        .value,
+                    onChanged: (value) {
+                      return;
+                    },
+                  ),
+                ],
+              );
+            },
+            // itemCount:
+            // snapshot.data == null ? 0 : data,
+          )),
         ]),
       ),
     ));
