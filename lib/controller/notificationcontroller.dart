@@ -40,6 +40,7 @@ class Notificationcontroller extends GetxController{
             content: Form(
               key: formkey,
               child: TextFormField(
+                textCapitalization: TextCapitalization.words,
                 controller: notification,
                 validator: ((value) {
                   if (value!.isEmpty) {

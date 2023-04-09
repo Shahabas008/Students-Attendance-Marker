@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Students/assignmentsstudents.dart';
 import 'package:collegeproject/Students/attendancestudents.dart';
 import 'package:collegeproject/Students/internalmarkstudents.dart';
@@ -5,15 +6,12 @@ import 'package:collegeproject/Students/notesstudents.dart';
 import 'package:collegeproject/Students/notificationstudents.dart';
 import 'package:collegeproject/Students/semesterstudent.dart';
 import 'package:collegeproject/Teacher/viewstudents.dart';
-import 'package:collegeproject/controller/createclassdetails.controller.dart';
-import 'package:collegeproject/controller/login_controller.dart';
-import 'package:collegeproject/controller/markcontroller.dart';
-import 'package:collegeproject/controller/requestcontroller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StudentMenupage extends StatefulWidget {
-  const StudentMenupage(
+class Myclassdetail extends StatefulWidget {
+  const Myclassdetail(
       {super.key,
       required this.teachername,
       required this.classname,
@@ -23,22 +21,10 @@ class StudentMenupage extends StatefulWidget {
   final String subjectname;
 
   @override
-  State<StudentMenupage> createState() => _StudentMenupageState();
+  State<Myclassdetail> createState() => _MyclassdetailState();
 }
 
-class _StudentMenupageState extends State<StudentMenupage> {
-  final controller = Get.put(LoginController());
-  final controller1 = Get.put(Markcontroller());
-  final controller2 = Get.put(Createclassdetailscontroller());
-  @override
-  void initState() {
-    super.initState();
-    controller1.subname = widget.subjectname;
-    controller2.subname = widget.subjectname;
-    controller2.classes = widget.classname;
-    controller2.teacher = widget.teachername;
-  }
-
+class _MyclassdetailState extends State<Myclassdetail> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,9 +33,15 @@ class _StudentMenupageState extends State<StudentMenupage> {
             actions: [
               IconButton(
                   onPressed: () {
-                    controller2.addtomyclasses();
+                    FirebaseFirestore.instance
+                        .collection("User")
+                        .doc(FirebaseAuth.instance.currentUser!.email)
+                        .collection("My-classes")
+                        .doc(widget.subjectname)
+                        .delete();
+                        Get.back();
                   },
-                  icon: const Icon(Icons.add))
+                  icon: const Icon(Icons.delete))
             ],
             centerTitle: true,
             title: Text(
@@ -110,12 +102,8 @@ class _StudentMenupageState extends State<StudentMenupage> {
                             backgroundColor: Colors.white,
                             minimumSize: const Size(120, 100)),
                         onPressed: () {
-                          Get.to(
-                            () => const AttendanceStudents(),
-                            arguments: {
-                              "subname": widget.subjectname
-                            }
-                          );
+                          Get.to(() => const AttendanceStudents(),
+                              arguments: {"subname": widget.subjectname});
                         },
                         child: Column(
                           children: [
@@ -289,9 +277,7 @@ class _StudentMenupageState extends State<StudentMenupage> {
                         minimumSize: const Size(350, 50)),
                     onPressed: () {
                       Get.to(() => const Studentsviewteacher(),
-                      arguments: {
-                        "Subjectname" : widget.subjectname
-                      });
+                          arguments: {"Subjectname": widget.subjectname});
                     },
                     child: const Text("Students List ")),
               ],
@@ -299,6 +285,4 @@ class _StudentMenupageState extends State<StudentMenupage> {
           ))),
     );
   }
-
-  
 }

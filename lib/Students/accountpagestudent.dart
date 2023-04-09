@@ -104,10 +104,12 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                           Icons.person,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('                 Profile',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: const Align(
+                          child:  Text('Profile',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),
@@ -124,10 +126,12 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                           Icons.school,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('             My Classes',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title:  const Align(
+                          child: Text('My Classes',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),
@@ -147,10 +151,12 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                             Icons.email,
                             color: Color.fromARGB(255, 161, 46, 46),
                           ),
-                          title: const Text('             verify E-Mail',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )),
+                          title:const  Align(
+                            child:  Text('verify E-Mail',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ),
                           trailing: checks
                               ? const Icon(
                                   Icons.check,
@@ -174,10 +180,12 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                           Icons.settings,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: Text('                settings',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: Align(
+                          child: Text('settings',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: Icon(Icons.arrow_forward),
                       ),
                     ),
@@ -194,10 +202,12 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
                           Icons.logout,
                           color: Color.fromARGB(255, 161, 46, 46),
                         ),
-                        title: const Text('                 Logout',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            )),
+                        title: const Align(
+                          child:  Text('Logout',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                         trailing: const Icon(Icons.arrow_forward),
                       ),
                     ),

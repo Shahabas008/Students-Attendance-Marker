@@ -7,6 +7,7 @@ import 'package:collegeproject/Teacher/semestermarkteacher.dart';
 import 'package:collegeproject/Teacher/viewstudents.dart';
 import 'package:collegeproject/controller/addstudentscontroller.dart';
 import 'package:collegeproject/controller/attendancecontroller.dart';
+import 'package:collegeproject/controller/createclassdetails.controller.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/markcontroller.dart';
 import 'package:collegeproject/controller/notificationcontroller.dart';
@@ -42,6 +43,7 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
   }
   final controller = Get.put(LoginController());
   final data = Get.put(Countercontroller());
+  final controller2 = Get.put(Createclassdetailscontroller());
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,12 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
             ),
           ),
           backgroundColor: const Color.fromARGB(255, 161, 46, 46),
+          actions: [
+            IconButton(
+              onPressed:() {  
+                controller2.deleteclass();
+              } , icon: const Icon(Icons.delete))
+          ],
         ),
         body: (Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),

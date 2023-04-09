@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collegeproject/Students/classlistviewstudetnts.dart';
+import 'package:collegeproject/Students/classlistviewstudents.dart';
 import 'package:collegeproject/Students/homenotificationstudents.dart';
 import 'package:collegeproject/Students/accountpagestudent.dart';
 import 'package:collegeproject/Teacher/accountpageteacher.dart';
@@ -52,7 +52,7 @@ class _HomepagelayoutState extends State<Homepagelayout> {
     const Accountpageteacher(),
   ];
   final studentPages = [
-    Classlistviewstudents(),
+    const Classlistviewstudents(),
     HomeNotificationstudentpage(),
     const Accountpagestudents(),
   ];

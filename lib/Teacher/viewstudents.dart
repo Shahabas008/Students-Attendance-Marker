@@ -18,6 +18,7 @@ class Studentsviewteacher extends StatelessWidget {
             .collection("Teacher")
             .doc(subname)
             .collection('Student-List')
+            .orderBy("Roll Number" , descending: false)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {

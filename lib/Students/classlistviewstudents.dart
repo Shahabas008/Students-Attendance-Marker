@@ -1,12 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Students/menustudents.dart';
 import 'package:collegeproject/controller/createclassdetails.controller.dart';
+import 'package:collegeproject/controller/requestcontroller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Classlistviewstudents extends StatelessWidget {
-  Classlistviewstudents({super.key});
+class Classlistviewstudents extends StatefulWidget {
+  const Classlistviewstudents({super.key});
+
+  @override
+  State<Classlistviewstudents> createState() => _ClasslistviewstudentsState();
+}
+
+class _ClasslistviewstudentsState extends State<Classlistviewstudents> {
   final data = Get.put(Createclassdetailscontroller());
+  final controller = Get.put(Requestcontroller());
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -58,17 +69,57 @@ class Classlistviewstudents extends StatelessWidget {
                               : snapshot.data!.docs.length,
                           itemBuilder: (_, i) {
                             DocumentSnapshot x = snapshot.data!.docs[i];
+                            String classes = x['Class Name'];
+                            String subject = x['Subject Name'];
+                            User? user = FirebaseAuth.instance.currentUser;
+                            bool accept = false;
+                            FirebaseFirestore.instance
+                                .collection("User")
+                                .doc(FirebaseAuth.instance.currentUser!.email)
+                                .collection("Subject")
+                                .doc("Request")
+                                .collection(subject)
+                                .doc(user!.displayName)
+                                .get()
+                                .then((value) {
+                              accept = value ["Accept"];
+                            });
                             return Padding(
                               padding:
                                   const EdgeInsets.fromLTRB(50, 30, 50, 15),
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.to(
-                                    () => StudentMenupage(
-                                        teachername: x['Teacher Name'],
-                                        classname: x['Class Name'],
-                                        subjectname: x['Subject Name']),
-                                  );
+                                  if (accept == true) {
+                                    Get.to(
+                                      () => StudentMenupage(
+                                          teachername: x['Teacher Name'],
+                                          classname: x['Class Name'],
+                                          subjectname: x['Subject Name']),
+                                    );
+                                  } else {
+                                    User? user =
+                                        FirebaseAuth.instance.currentUser;
+                                    String? username = user!.displayName;
+                                    controller.usernames = username;
+                                    String? email = user.email;
+                                    controller.subnames = subject;
+                                    controller.sentrequest(
+                                        classes, subject, username, email);
+                                    controller.sentrequesttoteacher(
+                                        username, classes, subject, email);
+                                    Get.showSnackbar(const GetSnackBar(
+                                      borderRadius: 8,
+                                      padding: EdgeInsets.all(20),
+                                      title: "A REQUEST SENT TO THE TEACHER",
+                                      messageText: Text("A request has been sent to the teacher. You are enable to enter the class when the teacher accepts your request.",
+                                      style: TextStyle(
+                                        color: Colors.white
+                                      ),),
+                                      duration: Duration(seconds: 5),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 161, 46, 46),
+                                    ));
+                                  }
                                 },
                                 child: Card(
                                   color:

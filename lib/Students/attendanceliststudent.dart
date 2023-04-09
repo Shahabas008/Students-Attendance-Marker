@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/controller/attendancecontroller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +13,7 @@ class Attendancelistteacher extends StatefulWidget {
 class AattendancelistteacherState extends State<Attendancelistteacher> {
   final controller = Get.put(Attendancecontroller());
   final selectedDate = Get.arguments["selectedDate"];
+  final date = Get.arguments["Date"];
 
   @override
   void initState() {
@@ -58,71 +58,61 @@ class AattendancelistteacherState extends State<Attendancelistteacher> {
             color: Colors.black,
           ),
           Expanded(
-            child: StreamBuilder<QuerySnapshot>(
+            child: StreamBuilder<DocumentSnapshot<Map<String,dynamic>>>(
               stream: FirebaseFirestore.instance
-                  .collection('User')
-                  .doc(FirebaseAuth.instance.currentUser!.email)
-                  .collection("Subject")
+                  .collection('Teacher')
                   .doc(controller.subname)
-                  .collection("Student-List")
-                  .orderBy("Roll Number" , descending: false)
+                  .collection("Attendance")
+                  .doc(date)
                   .snapshots(),
               builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                  AsyncSnapshot<DocumentSnapshot<Map<String,dynamic>>> snapshot) {
                 return ListView.builder(
                   itemBuilder: (context, index) {
-                    DocumentSnapshot x = snapshot.data!.docs[index];
+                     Map<String,dynamic> data = snapshot.data!.data() as Map<String,dynamic> ;
                     return Obx(() {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            x['student Name'],
+                            data['student Name'],
                             style: const TextStyle(fontSize: 18),
                           ),
                           Radio(
                             value: "absent",
                             groupValue:
-                                controller.attendance[x['student Name']],
+                                controller.attendance[data['student Name']],
                             onChanged: (value) {
-                              controller.attendance[x['student Name']] = value;
+                              controller.attendance[data['student Name']] = value;
                             },
                           ),
                           Radio(
                             value: "present",
                             groupValue:
-                                controller.attendance[x['student Name']],
+                                controller.attendance[data['student Name']],
                             onChanged: (value) {
-                              controller.attendance[x['student Name']] = value;
+                              controller.attendance[data['student Name']] = value;
                             },
                           ),
                           Radio(
                             value: "late",
                             groupValue:
-                                controller.attendance[x['student Name']],
+                                controller.attendance[data['student Name']],
                             onChanged: (value) {
-                              controller.attendance[x['student Name']] = value;
+                              controller.attendance[data['student Name']] = value;
                             },
                           ),
                         ],
                       );
                     });
                   },
-                  itemCount:
-                      snapshot.data == null ? 0 : snapshot.data!.docs.length,
+                  // itemCount:
+                      // snapshot.data == null ? 0 : data,
                 );
               },
             ),
           ),
-          SizedBox(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(minimumSize: const Size(350, 50)),
-              onPressed: () {
-                controller.submitattendance();
-              },
-              child: const Text("Submit"),
-            ),
-          )
+          
         ]),
       ),
     ));

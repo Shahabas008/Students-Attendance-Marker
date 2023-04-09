@@ -28,6 +28,7 @@ class _AttendanceStudentsState extends State<AttendanceStudents> {
         appBar: AppBar(
           title: const Text("Attendance Date"),
         ),
+        //evde attendanceliststudentsilott navigate cheyumbo Date ne argument akki kodukuka.
       ),
     );
   }
