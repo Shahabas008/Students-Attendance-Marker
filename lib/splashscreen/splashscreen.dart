@@ -18,35 +18,27 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return   SafeArea(
       child: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 234, 234, 234),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Column(
-              children:  [
-                const SizedBox(
-                  height: 150,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:const [
-                      Text(
-                      'AttendEase ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ],
-                ),
-               const  SizedBox(height: 250),
-              
-              ],
-            ),
-          ),
-        ),
+        backgroundColor: const Color.fromARGB(255, 234, 234, 234),
+         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+           children:    [
+             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+               children:const [
+                 Text(
+                   'Digital \nAttendance \nMarker',
+                   style: TextStyle(
+                     fontSize: 40,
+                     fontWeight: FontWeight.bold,
+                     color: Color.fromARGB(255, 161, 46, 46),
+                   ),
+                 ),
+               ],
+             ),
+           ],
+         ),
       ),
     );
   }
