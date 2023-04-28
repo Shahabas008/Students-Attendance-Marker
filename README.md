@@ -1,6 +1,6 @@
 # DIGITAL ATTENDANCE MARKER
 
-AN application for teachers and students of a college , the teachers can mark attendance online and publish the result of internal and semester marks and more.
+An application for teachers and students of a college , the teachers can mark attendance online and publish the result of internal and semester marks and more.
 
 The Digital attendance marker is an innovative platform designed to streamline the
 attendance tracking process in educational institutions. With this system, teachers can easily
