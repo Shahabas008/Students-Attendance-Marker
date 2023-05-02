@@ -32,28 +32,6 @@ class Createclassdetails extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(0),
                       child: TextFormField(
-                        inputFormatters: [LengthLimitingTextInputFormatter(10)],
-                        textCapitalization: TextCapitalization.words,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'The field is required';
-                          }
-                          return null;
-                        },
-                        controller: controller.teachername,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.person_4),
-                          border: OutlineInputBorder(),
-                          labelText: 'Teacher Name',
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(0),
-                      child: TextFormField(
                         textCapitalization: TextCapitalization.characters,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -99,10 +77,10 @@ class Createclassdetails extends StatelessWidget {
                           minimumSize: const Size(395, 50)),
                       onPressed: () {
                         controller.registerclass(
-                            controller.teachername.text,
+                            
                             controller.classname.text,
                             controller.subjectname.text);
-                        controller.teachername.clear();
+
                         controller.subjectname.clear();
                         controller.classname.clear();
                       },

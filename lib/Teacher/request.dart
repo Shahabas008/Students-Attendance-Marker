@@ -18,14 +18,17 @@ class Requestpage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-            return const Scaffold(
-              body: Center(
-                child: Text(
-                  'You haven\'t added any classes',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 161, 46, 46),
+            return SafeArea(
+              child: Scaffold(
+                appBar: AppBar(),
+                body: const Center(
+                  child: Text(
+                    'You don\'t have any requests.',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 161, 46, 46),
+                    ),
                   ),
                 ),
               ),

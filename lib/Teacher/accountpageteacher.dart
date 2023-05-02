@@ -3,6 +3,7 @@ import 'package:collegeproject/Resources/my_flutter_app_icons.dart';
 import 'package:collegeproject/Teacher/profilepageteacher.dart';
 import 'package:collegeproject/Teacher/request.dart';
 import 'package:collegeproject/Teacher/verifyemail.dart';
+import 'package:collegeproject/config/color.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/profilecontrollerpage.dart';
 import 'package:collegeproject/controller/sign_up_controller.dart';
@@ -64,6 +65,8 @@ class _ProfileteacherState extends State<Accountpageteacher> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: SECONDARY_COLOUR,
+          foregroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,
           title: const Text(

@@ -1,3 +1,4 @@
+import 'package:collegeproject/config/color.dart';
 import 'package:collegeproject/splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:collegeproject/Resources/palette.dart';
@@ -28,9 +29,9 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Palette.kToDark,
       appBarTheme: const AppBarTheme(
-        elevation: 10,
-        color:    Color.fromARGB(255, 161, 46, 46),
-        foregroundColor: Colors.white
+        elevation: 0,
+        color:   PRIMARY_COLOUR,
+        foregroundColor: Color.fromARGB(255, 0, 0, 0)
       ),
       scaffoldBackgroundColor:  const Color.fromARGB(255, 234, 234, 234),),
       initialRoute: 'splashscreen',

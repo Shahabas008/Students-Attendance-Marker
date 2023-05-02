@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Teacher/createclass.dart';
 import 'package:collegeproject/Teacher/createclassdetails.dart';
 import 'package:collegeproject/Teacher/menuteacher.dart';
+import 'package:collegeproject/config/color.dart';
 import 'package:collegeproject/controller/createclassdetails.controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class Classlistviewteacher extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.docs.isEmpty || snapshot.data == null) {
-            return const Createclass();
+            return   Createclass();
           } else {
             return SafeArea(
               child: Scaffold(

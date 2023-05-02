@@ -35,7 +35,6 @@ class _StudentMenupageState extends State<StudentMenupage> {
     controller1.subname = widget.subjectname;
     controller2.subname = widget.subjectname;
     controller2.classes = widget.classname;
-    controller2.teacher = widget.teachername;
   }
 
   @override

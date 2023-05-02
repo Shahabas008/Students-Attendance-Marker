@@ -1,16 +1,19 @@
 import 'package:collegeproject/Teacher/createclassdetails.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Createclass extends StatelessWidget {
-  const Createclass({super.key});
-
+     Createclass({super.key});
+ 
+ final name = FirebaseAuth.instance.currentUser!.displayName;
+   
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Get Started'),
+          title:   Text('Hey $name, Get Started'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(15),

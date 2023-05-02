@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/Students/myclassesstudents.dart';
 import 'package:collegeproject/Teacher/profilepageteacher.dart';
 import 'package:collegeproject/Teacher/verifyemail.dart';
+import 'package:collegeproject/config/color.dart';
 import 'package:collegeproject/controller/login_controller.dart';
 import 'package:collegeproject/controller/profilecontrollerpage.dart';
 import 'package:collegeproject/controller/sign_up_controller.dart';
@@ -65,6 +66,8 @@ class _AccountpagestudentsState extends State<Accountpagestudents> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: SECONDARY_COLOUR,
+          foregroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,
           title: const Text(

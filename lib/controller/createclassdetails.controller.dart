@@ -6,16 +6,15 @@ import 'package:get/get.dart';
 
 class Createclassdetailscontroller extends GetxController {
   ///Textformfield variable declaration
-  final teachername = TextEditingController();
   final classname = TextEditingController();
   final subjectname = TextEditingController();
   final formkey = GlobalKey<FormState>();
   String subname = "";
-  String teacher = '';
   String classes = '';
   //uploading the details of the class for students
   void registerclass(
-      String teachername, String classname, String subjectname) async {
+       String classname, String subjectname) async {
+        final user = FirebaseAuth.instance.currentUser;
     if (formkey.currentState!.validate()) {
       await FirebaseFirestore.instance
           .collection('Teacher')
@@ -23,18 +22,19 @@ class Createclassdetailscontroller extends GetxController {
           .collection("Classes")
           .doc(subjectname)
           .set({
-        "Teacher Name": teachername,
+        "Teacher Name": user!.displayName,
         "Class Name": classname,
         "Subject Name": subjectname,
       });
       //uploading the class details for teachers
+      
       await FirebaseFirestore.instance
           .collection('User')
           .doc(FirebaseAuth.instance.currentUser!.email)
           .collection('Subject')
           .doc(subjectname)
           .set({
-        "Teacher Name": teachername,
+        "Teacher Name": user.displayName,
         "Class Name": classname,
         "Subject Name": subjectname,
       });
@@ -44,13 +44,14 @@ class Createclassdetailscontroller extends GetxController {
 
 //adding the students class to my class page on account page
   void addtomyclasses() async {
+    final user = FirebaseAuth.instance.currentUser;
     await FirebaseFirestore.instance
         .collection('User')
         .doc(FirebaseAuth.instance.currentUser!.email)
         .collection('My-classes')
         .doc(subname)
         .set({
-      "Teacher Name": teacher,
+      "Teacher Name": user!.displayName,
       "Class Name": classes,
       "Subject Name": subname,
     });
