@@ -23,7 +23,7 @@ class Requestpage extends StatelessWidget {
                 appBar: AppBar(),
                 body: const Center(
                   child: Text(
-                    'You don\'t have any requests.',
+                    'You haven\'t created any classes .',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

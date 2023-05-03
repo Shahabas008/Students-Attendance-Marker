@@ -15,10 +15,9 @@ class Studentsviewteacher extends StatelessWidget {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection("Teacher")
-            .doc(subname)
-            .collection('Student-List')
-            .orderBy("Roll Number" , descending: false)
+            .collection("Students")
+            .doc("Students-List")
+            .collection(subname)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
@@ -80,6 +79,7 @@ class Studentsviewteacher extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemBuilder: (_, index) {
+                          final indexs = index.toString() + 1.toString(); 
                           DocumentSnapshot data = snapshot.data!.docs[index];
                           return IntrinsicHeight(
                             child: Row(
@@ -93,7 +93,7 @@ class Studentsviewteacher extends StatelessWidget {
                                       Column(
                                         children: [
                                           Text(
-                                            data["Roll Number"],
+                                            indexs,
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500),
@@ -117,7 +117,7 @@ class Studentsviewteacher extends StatelessWidget {
                                       Column(
                                         children: [
                                           Text(
-                                            data["student Name"],
+                                            data["Student-Name"],
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500),

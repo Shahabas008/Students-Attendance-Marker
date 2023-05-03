@@ -53,6 +53,7 @@ class Createclassdetails extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(0),
                       child: TextFormField(
+                        maxLength: 12,
                         inputFormatters: [LengthLimitingTextInputFormatter(15)],
                         textCapitalization: TextCapitalization.characters,
                         validator: (value) {
@@ -76,9 +77,7 @@ class Createclassdetails extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           minimumSize: const Size(395, 50)),
                       onPressed: () {
-                        controller.registerclass(
-                            
-                            controller.classname.text,
+                        controller.registerclass(controller.classname.text,
                             controller.subjectname.text);
 
                         controller.subjectname.clear();

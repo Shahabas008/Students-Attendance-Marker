@@ -13,11 +13,8 @@ class _RequestdetailspageState extends State<Requestdetailspage> {
   @override
   Widget build(BuildContext context) {
     final subnames = Get.arguments["subjectname"];
-    bool accept = false;
 
-    setState(() {
-      
-    });
+    setState(() {});
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -53,6 +50,8 @@ class _RequestdetailspageState extends State<Requestdetailspage> {
                       DocumentSnapshot x = snapshot.data!.docs[index];
                       String studentname = x["Student Name"];
                       String email = x["E-Mail"];
+                      bool accept = x["Accept"] ?? false;
+
                       return Padding(
                         padding: const EdgeInsets.fromLTRB(50, 30, 50, 15),
                         child: Card(
@@ -67,10 +66,6 @@ class _RequestdetailspageState extends State<Requestdetailspage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
                                         x["Student Name"] +
@@ -85,7 +80,7 @@ class _RequestdetailspageState extends State<Requestdetailspage> {
                                       ),
                                     ],
                                   ),
-                                  accept == true
+                                  Obx(() => accept.obs == true
                                       ? Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -105,6 +100,14 @@ class _RequestdetailspageState extends State<Requestdetailspage> {
                                           children: [
                                             TextButton(
                                               onPressed: () {
+                                                FirebaseFirestore.instance
+                                                    .collection("Students")
+                                                    .doc("Students-List")
+                                                    .collection(subnames)
+                                                    .doc(studentname)
+                                                    .set({
+                                                      'Student-Name' : studentname,
+                                                    });
                                                 FirebaseFirestore.instance
                                                     .collection("Student")
                                                     .doc("Request")
@@ -155,7 +158,7 @@ class _RequestdetailspageState extends State<Requestdetailspage> {
                                                     .collection(subnames)
                                                     .doc(studentname)
                                                     .delete();
-                                                    FirebaseFirestore.instance
+                                                FirebaseFirestore.instance
                                                     .collection("User")
                                                     .doc(email)
                                                     .collection("Subject")
@@ -176,7 +179,7 @@ class _RequestdetailspageState extends State<Requestdetailspage> {
                                               ),
                                             )
                                           ],
-                                        )
+                                        ))
                                 ],
                               )),
                         ),
@@ -184,7 +187,7 @@ class _RequestdetailspageState extends State<Requestdetailspage> {
                     });
               }
             } else {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),

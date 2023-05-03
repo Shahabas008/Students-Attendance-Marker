@@ -40,6 +40,7 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
     data2.subname = widget.subjectname;
     data3.subname = widget.subjectname;
     data4.subname = widget.subjectname;
+    controller2.subname = widget.subjectname;
   }
   final controller = Get.put(LoginController());
   final data = Get.put(Countercontroller());
@@ -56,10 +57,8 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
             style: const TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 255, 255, 255),
             ),
           ),
-          backgroundColor: const Color.fromARGB(255, 161, 46, 46),
           actions: [
             IconButton(
               onPressed:() {  
@@ -303,13 +302,13 @@ class _TeacherMenupageState extends State<TeacherMenupage> {
                 const SizedBox(
                   height: 1,
                 ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(350, 50)),
-                    onPressed: () {
-                      data.addstudents(context);
-                    },
-                    child: const Text("Add Students"))
+                // ElevatedButton(
+                //     style: ElevatedButton.styleFrom(
+                //         minimumSize: const Size(350, 50)),
+                //     onPressed: () {
+                //       data.addstudents(context);
+                //     },
+                //     child: const Text("Add Students"))
               ],
             ),
           ),

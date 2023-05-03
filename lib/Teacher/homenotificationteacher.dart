@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collegeproject/controller/homenotificationcontroller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,6 +43,8 @@ class HomeNotificationteacherpage extends StatelessWidget {
                           ? 0
                           : snapshot.data!.docs.length,
                       itemBuilder: (context, i) {
+                        User? user = FirebaseAuth.instance.currentUser;
+                        String? name = user!.displayName;
                         DocumentSnapshot x = snapshot.data!.docs[i];
                         return Card(
                             elevation: 10,
@@ -65,8 +68,7 @@ class HomeNotificationteacherpage extends StatelessWidget {
                                     Padding(
                                       padding:
                                           const EdgeInsets.fromLTRB(0, 5, 5, 0),
-                                      child: Text(
-                                        x['Teacher Name'],
+                                      child: Text(name.toString(),
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w500),
                                       ),
